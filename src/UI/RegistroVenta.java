@@ -199,6 +199,11 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
         btnCancelar.setText("Cancelar");
@@ -291,6 +296,11 @@ public class RegistroVenta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        ConfirmarVenta cv = new ConfirmarVenta();
+        cv.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
