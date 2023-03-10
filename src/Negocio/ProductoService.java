@@ -14,7 +14,7 @@ import Entidades.Producto;
  * @author Desktop
  */
 public class ProductoService {
-    private ProductoDAO productoDAO;
+    private final ProductoDAO productoDAO;
 
     public ProductoService() {
         productoDAO = new ProductoDAO();

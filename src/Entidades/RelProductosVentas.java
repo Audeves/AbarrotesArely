@@ -6,9 +6,10 @@
 package Entidades;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,55 +25,62 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "rel_productos_ventas")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "RelProductosVentas.findAll", query = "SELECT r FROM RelProductosVentas r")
-    , @NamedQuery(name = "RelProductosVentas.findByIdrelProductosVentas", query = "SELECT r FROM RelProductosVentas r WHERE r.idrelProductosVentas = :idrelProductosVentas")
-    , @NamedQuery(name = "RelProductosVentas.findByCantidadVendida", query = "SELECT r FROM RelProductosVentas r WHERE r.cantidadVendida = :cantidadVendida")
-    , @NamedQuery(name = "RelProductosVentas.findByPrecioVenta", query = "SELECT r FROM RelProductosVentas r WHERE r.precioVenta = :precioVenta")
-    , @NamedQuery(name = "RelProductosVentas.findBySubtotal", query = "SELECT r FROM RelProductosVentas r WHERE r.subtotal = :subtotal")})
+//@NamedQueries({
+//    @NamedQuery(name = "RelProductosVentas.findAll", query = "SELECT r FROM RelProductosVentas r")
+//    , @NamedQuery(name = "RelProductosVentas.findByIdrelProductosVentas", query = "SELECT r FROM RelProductosVentas r WHERE r.id = :idrelProductosVentas")
+//    , @NamedQuery(name = "RelProductosVentas.findByCantidadVendida", query = "SELECT r FROM RelProductosVentas r WHERE r.cantidadVendida = :cantidadVendida")
+//    , @NamedQuery(name = "RelProductosVentas.findByPrecioVenta", query = "SELECT r FROM RelProductosVentas r WHERE r.precioVenta = :precioVenta")
+//    , @NamedQuery(name = "RelProductosVentas.findBySubtotal", query = "SELECT r FROM RelProductosVentas r WHERE r.subtotal = :subtotal")})
 public class RelProductosVentas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @Column(name = "idrel_productos_ventas")
-    private Integer idrelProductosVentas;
-    @Basic(optional = false)
-    @Column(name = "cantidad_vendida")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer Id;
+
+    @Column(name = "cantidad_vendida", nullable = false)
     private int cantidadVendida;
-    @Basic(optional = false)
-    @Column(name = "precio_venta")
+
+    @Column(name = "precioVenta", nullable = false)
     private float precioVenta;
-    @Basic(optional = false)
-    @Column(name = "subtotal")
+
+    @Column(name = "subtotal", nullable = false)
     private float subtotal;
-    @JoinColumn(name = "producto_idproducto", referencedColumnName = "idproducto")
+
+    @JoinColumn(name = "idProducto", nullable = false)
     @ManyToOne(optional = false)
-    private Producto productoIdproducto;
-    @JoinColumn(name = "venta_idventa", referencedColumnName = "idventa")
+    private Producto producto;
+
+    @JoinColumn(name = "idVenta", nullable = false)
     @ManyToOne(optional = false)
-    private Venta ventaIdventa;
+    private Venta venta;
 
     public RelProductosVentas() {
     }
 
-    public RelProductosVentas(Integer idrelProductosVentas) {
-        this.idrelProductosVentas = idrelProductosVentas;
-    }
-
-    public RelProductosVentas(Integer idrelProductosVentas, int cantidadVendida, float precioVenta, float subtotal) {
-        this.idrelProductosVentas = idrelProductosVentas;
+    public RelProductosVentas(Integer Id, int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
+        this.Id = Id;
         this.cantidadVendida = cantidadVendida;
         this.precioVenta = precioVenta;
         this.subtotal = subtotal;
+        this.producto = Producto;
+        this.venta = venta;
     }
 
-    public Integer getIdrelProductosVentas() {
-        return idrelProductosVentas;
+    public RelProductosVentas(int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
+        this.cantidadVendida = cantidadVendida;
+        this.precioVenta = precioVenta;
+        this.subtotal = subtotal;
+        this.producto = Producto;
+        this.venta = venta;
     }
 
-    public void setIdrelProductosVentas(Integer idrelProductosVentas) {
-        this.idrelProductosVentas = idrelProductosVentas;
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
     public int getCantidadVendida() {
@@ -99,26 +107,26 @@ public class RelProductosVentas implements Serializable {
         this.subtotal = subtotal;
     }
 
-    public Producto getProductoIdproducto() {
-        return productoIdproducto;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setProductoIdproducto(Producto productoIdproducto) {
-        this.productoIdproducto = productoIdproducto;
+    public void setProducto(Producto Producto) {
+        this.producto = Producto;
     }
 
-    public Venta getVentaIdventa() {
-        return ventaIdventa;
+    public Venta getVenta() {
+        return venta;
     }
 
-    public void setVentaIdventa(Venta ventaIdventa) {
-        this.ventaIdventa = ventaIdventa;
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idrelProductosVentas != null ? idrelProductosVentas.hashCode() : 0);
+        hash += (Id != null ? Id.hashCode() : 0);
         return hash;
     }
 
@@ -129,7 +137,7 @@ public class RelProductosVentas implements Serializable {
             return false;
         }
         RelProductosVentas other = (RelProductosVentas) object;
-        if ((this.idrelProductosVentas == null && other.idrelProductosVentas != null) || (this.idrelProductosVentas != null && !this.idrelProductosVentas.equals(other.idrelProductosVentas))) {
+        if ((this.Id == null && other.Id != null) || (this.Id != null && !this.Id.equals(other.Id))) {
             return false;
         }
         return true;
@@ -137,7 +145,6 @@ public class RelProductosVentas implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.RelProductosVentas[ idrelProductosVentas=" + idrelProductosVentas + " ]";
+        return "RelProductosVentas{" + "Id=" + Id + ", cantidadVendida=" + cantidadVendida + ", precioVenta=" + precioVenta + ", subtotal=" + subtotal + ", Producto=" + producto + ", venta=" + venta + '}';
     }
-    
 }

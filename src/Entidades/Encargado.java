@@ -7,10 +7,13 @@ package Entidades;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,37 +30,34 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "encargado")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Encargado.findAll", query = "SELECT e FROM Encargado e")
-    , @NamedQuery(name = "Encargado.findByIdencargado", query = "SELECT e FROM Encargado e WHERE e.idencargado = :idencargado")
-    , @NamedQuery(name = "Encargado.findByRfc", query = "SELECT e FROM Encargado e WHERE e.rfc = :rfc")})
+//@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "Encargado.findAll", query = "SELECT e FROM Encargado e")
+//    , @NamedQuery(name = "Encargado.findByIdencargado", query = "SELECT e FROM Encargado e WHERE e.idencargado = :idencargado")
+//    , @NamedQuery(name = "Encargado.findByRfc", query = "SELECT e FROM Encargado e WHERE e.rfc = :rfc")})
 public class Encargado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @Column(name = "idencargado")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer idencargado;
-    @Basic(optional = false)
-    @Column(name = "rfc")
+    @Column(name = "rfc", nullable = false)
+    
     private String rfc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encargado")
-    private Collection<Venta> ventaCollection;
-    @JoinColumn(name = "persona_idPersona", referencedColumnName = "idPersona")
-    @ManyToOne(optional = false)
-    private Persona personaidPersona;
+    private List<Venta> ventas;
+    
+    @JoinColumn(name = "idPersona", nullable = false)
+    @ManyToOne()
+    private Persona persona;
 
     public Encargado() {
     }
-
-    public Encargado(Integer idencargado) {
-        this.idencargado = idencargado;
-    }
-
-    public Encargado(Integer idencargado, String rfc) {
-        this.idencargado = idencargado;
+    
+    public Encargado(String rfc,  Persona personaidPersona) {
         this.rfc = rfc;
+        this.persona = personaidPersona;
     }
 
     public Integer getIdencargado() {
@@ -76,46 +76,30 @@ public class Encargado implements Serializable {
         this.rfc = rfc;
     }
 
-    @XmlTransient
     public Collection<Venta> getVentaCollection() {
-        return ventaCollection;
+        return ventas;
     }
 
-    public void setVentaCollection(Collection<Venta> ventaCollection) {
-        this.ventaCollection = ventaCollection;
+    public void setVentaCollection(List<Venta> ventaCollection) {
+        this.ventas = ventaCollection;
     }
 
     public Persona getPersonaidPersona() {
-        return personaidPersona;
+        return persona;
     }
 
     public void setPersonaidPersona(Persona personaidPersona) {
-        this.personaidPersona = personaidPersona;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idencargado != null ? idencargado.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Encargado)) {
-            return false;
-        }
-        Encargado other = (Encargado) object;
-        if ((this.idencargado == null && other.idencargado != null) || (this.idencargado != null && !this.idencargado.equals(other.idencargado))) {
-            return false;
-        }
-        return true;
+        this.persona = personaidPersona;
     }
 
     @Override
     public String toString() {
-        return "Entidades.Encargado[ idencargado=" + idencargado + " ]";
+        return "Encargado{" + "idencargado=" + idencargado + ", rfc=" + rfc + ", ventaCollection=" + ventas + ", personaidPersona=" + persona + '}';
     }
+    
+    
+    
+    
+    
     
 }
