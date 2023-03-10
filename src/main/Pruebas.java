@@ -46,22 +46,26 @@ public class Pruebas {
         //Aqui insertamos el producto
         Producto producto = new Producto("Marinela", 15, 100, "Gansitos");
         ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>(); 
-        //Aqui creamos la personA
+        //Aqui creamos la persona
         Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
         Encargado encargado = new Encargado("JFKDND", persona);
+        listaEncargados.add(encargado);
 
         EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
         EntityManager em = managerFactory.createEntityManager();
         try {
             em.getTransaction().begin();
             Persona personaBuscada = em.find(Persona.class, 1);
+            Producto productoBuscado = em.find(Producto.class, 1);
             Encargado encargadoBuscado = em.find(Encargado.class, 1);
+            Venta ventaBuscada = em.find(Venta.class, 1);
             Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
+            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
 //            encargado.setPersonaidPersona(personaBuscada);
 //
 //            em.persist(encargado);
         
-            em.persist(venta);
+            em.persist(relProductosVentas);
             
 
 

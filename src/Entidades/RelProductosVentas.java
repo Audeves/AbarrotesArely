@@ -58,8 +58,7 @@ public class RelProductosVentas implements Serializable {
     public RelProductosVentas() {
     }
 
-    public RelProductosVentas(Integer Id, int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
-        this.Id = Id;
+    public RelProductosVentas( int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
         this.cantidadVendida = cantidadVendida;
         this.precioVenta = precioVenta;
         this.subtotal = subtotal;
@@ -67,13 +66,6 @@ public class RelProductosVentas implements Serializable {
         this.venta = venta;
     }
 
-    public RelProductosVentas(int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
-        this.cantidadVendida = cantidadVendida;
-        this.precioVenta = precioVenta;
-        this.subtotal = subtotal;
-        this.producto = Producto;
-        this.venta = venta;
-    }
 
     public Integer getId() {
         return Id;

@@ -70,6 +70,15 @@ public class Venta implements Serializable {
         this.encargado = encargado;
     }
 
+    public Venta(float total, Date fecha, Collection<RelProductosVentas> relProductosVentasCollection, Encargado encargado) {
+        this.total = total;
+        this.fecha = fecha;
+        this.relProductosVentasCollection = relProductosVentasCollection;
+        this.encargado = encargado;
+    }
+    
+    
+
     public Integer getId() {
         return Id;
     }
