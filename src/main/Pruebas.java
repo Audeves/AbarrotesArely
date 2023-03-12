@@ -12,11 +12,9 @@ import Entidades.Persona;
 import Entidades.Producto;
 import Entidades.RelProductosVentas;
 import Entidades.Venta;
-import Negocio.PersonaService;
 import Negocio.ProductoService;
 import Negocio.VentaService;
 import Negocio.VentasService;
-import java.text.SimpleDateFormat;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,25 +40,14 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Date date = new Date();
-        SimpleDateFormat formatoFechaHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String fechaHoraFormateada = formatoFechaHora.format(date);
-        System.out.println("Fecha y hora actual: " + fechaHoraFormateada);
-        
+        Date date = new GregorianCalendar(2023, Calendar.MARCH, 9).getTime();
         ProductoService ps = new ProductoService();
-        
+
         //Aqui insertamos el producto
         Producto producto = new Producto("Marinela", 15, 100, "Gansitos");
-//        ps.agregarProducto(producto);
-            
         ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>(); 
         //Aqui creamos la persona
         Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
-        PersonaService personaService = new PersonaService();
-//        personaService.agregarPersona(persona);
-        
-        
-        
         Encargado encargado = new Encargado("JFKDND", persona);
         listaEncargados.add(encargado);
 
@@ -74,12 +61,12 @@ public class Pruebas {
             Venta ventaBuscada = em.find(Venta.class, 1);
             Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
             RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
-            encargado.setPersonaidPersona(personaBuscada);
-            
+//            encargado.setPersonaidPersona(personaBuscada);
+//
 //            em.persist(encargado);
-//            em.persist(venta);            
+        
             em.persist(relProductosVentas);
-
+            
 
 
             em.getTransaction().commit();
@@ -90,6 +77,7 @@ public class Pruebas {
         } finally {
             em.close();
         }
+
 //        Persona person = new Persona();
 //        person.setCalle("Calle Miguelles");
 //        person.setCiudad("Obregón");

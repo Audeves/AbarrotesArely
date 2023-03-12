@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/BaseDAO.java</file>
-            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Entidades/Venta.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Entidades/Producto.java</file>
             <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/main/ConexionBD.java</file>
-            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/META-INF/persistence.xml</file>
-            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/main/Pruebas.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Negocio/ProductoService.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/VentaDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Entidades/Encargado.java</file>
             <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/ProductoDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Entidades/Venta.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Entidades/Persona.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Negocio/VentasService.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/main/Pruebas.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Negocio/ControlVentas.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/BaseDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Negocio/VentaService.java</file>
         </group>
     </open-files>
 </project-private>
