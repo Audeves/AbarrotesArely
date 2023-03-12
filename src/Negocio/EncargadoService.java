@@ -46,4 +46,5 @@ public class EncargadoService {
     public List<Encargado> mostrarTodosLosEncargados() {
         return encargadoDAO.mostrarTodas();
     }
+    
 }

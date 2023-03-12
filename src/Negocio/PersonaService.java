@@ -45,4 +45,5 @@ public class PersonaService {
         // Lógica adicional antes de mostrar todas las personas, si es necesario
         return personaDAO.mostrarTodas();
     }
+    
 }
