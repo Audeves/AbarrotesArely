@@ -12,6 +12,9 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -31,53 +34,57 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "venta")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Venta.findAll", query = "SELECT v FROM Venta v")
-    , @NamedQuery(name = "Venta.findByIdventa", query = "SELECT v FROM Venta v WHERE v.idventa = :idventa")
-    , @NamedQuery(name = "Venta.findByTotal", query = "SELECT v FROM Venta v WHERE v.total = :total")
-    , @NamedQuery(name = "Venta.findByFecha", query = "SELECT v FROM Venta v WHERE v.fecha = :fecha")})
+//@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "Venta.findAll", query = "SELECT v FROM Venta v")
+//    , @NamedQuery(name = "Venta.findByIdventa", query = "SELECT v FROM Venta v WHERE v.idventa = :idventa")
+//    , @NamedQuery(name = "Venta.findByTotal", query = "SELECT v FROM Venta v WHERE v.total = :total")
+//    , @NamedQuery(name = "Venta.findByFecha", query = "SELECT v FROM Venta v WHERE v.fecha = :fecha")})
 public class Venta implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @Column(name = "idventa")
-    private Integer idventa;
-    @Basic(optional = false)
-    @Column(name = "total")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer Id;
+
+    @Column(name = "total", nullable = false)
     private float total;
-    @Basic(optional = false)
-    @Column(name = "fecha")
+
+    @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ventaIdventa")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venta")
     private Collection<RelProductosVentas> relProductosVentasCollection;
-    @JoinColumns({
-        @JoinColumn(name = "encargado_idencargado", referencedColumnName = "idencargado")
-        , @JoinColumn(name = "encargado_persona_idPersona", referencedColumnName = "persona_idPersona")})
-    @ManyToOne(optional = false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idEncargado", nullable = false)
     private Encargado encargado;
 
     public Venta() {
     }
 
-    public Venta(Integer idventa) {
-        this.idventa = idventa;
-    }
-
-    public Venta(Integer idventa, float total, Date fecha) {
-        this.idventa = idventa;
+    public Venta(float total, Date fecha, Encargado encargado) {
         this.total = total;
         this.fecha = fecha;
+        this.encargado = encargado;
     }
 
-    public Integer getIdventa() {
-        return idventa;
+    public Venta(float total, Date fecha, Collection<RelProductosVentas> relProductosVentasCollection, Encargado encargado) {
+        this.total = total;
+        this.fecha = fecha;
+        this.relProductosVentasCollection = relProductosVentasCollection;
+        this.encargado = encargado;
+    }
+    
+    
+
+    public Integer getId() {
+        return Id;
     }
 
-    public void setIdventa(Integer idventa) {
-        this.idventa = idventa;
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
     public float getTotal() {
@@ -96,7 +103,6 @@ public class Venta implements Serializable {
         this.fecha = fecha;
     }
 
-    @XmlTransient
     public Collection<RelProductosVentas> getRelProductosVentasCollection() {
         return relProductosVentasCollection;
     }
@@ -113,29 +119,4 @@ public class Venta implements Serializable {
         this.encargado = encargado;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idventa != null ? idventa.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Venta)) {
-            return false;
-        }
-        Venta other = (Venta) object;
-        if ((this.idventa == null && other.idventa != null) || (this.idventa != null && !this.idventa.equals(other.idventa))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Entidades.Venta[ idventa=" + idventa + " ]";
-    }
-    
 }
