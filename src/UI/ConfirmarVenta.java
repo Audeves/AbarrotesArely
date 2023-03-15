@@ -43,8 +43,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         labelCambio = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        botones1 = new UI.Botones();
-        botones2 = new UI.Botones();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,22 +199,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                     .addComponent(labelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        botones1.setText("Cancelar");
-        botones1.setColor1(new java.awt.Color(166, 78, 78));
-        botones1.setColor2(new java.awt.Color(166, 78, 78));
-        botones1.setColor3(new java.awt.Color(166, 78, 78));
-        botones1.setMaximumSize(new java.awt.Dimension(300, 55));
-        botones1.setMinimumSize(new java.awt.Dimension(300, 55));
-        botones1.setPreferredSize(new java.awt.Dimension(300, 55));
-
-        botones2.setText("Aceptar");
-        botones2.setColor1(new java.awt.Color(54, 87, 77));
-        botones2.setColor2(new java.awt.Color(54, 87, 77));
-        botones2.setColor3(new java.awt.Color(54, 87, 77));
-        botones2.setMaximumSize(new java.awt.Dimension(300, 55));
-        botones2.setMinimumSize(new java.awt.Dimension(300, 55));
-        botones2.setPreferredSize(new java.awt.Dimension(300, 55));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -229,12 +211,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(botones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addComponent(botones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,11 +220,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                     .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botones1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botones2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGap(104, 104, 104))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -266,8 +238,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private UI.Botones botones1;
-    private UI.Botones botones2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
