@@ -43,6 +43,8 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         labelCambio = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        botones1 = new UI.Botones();
+        botones2 = new UI.Botones();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,11 +113,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             panelTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTotalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
+                    .addComponent(labelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
         );
         panelTotalLayout.setVerticalGroup(
             panelTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +149,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             panelPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPagoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelPago, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
+                    .addComponent(labelPago, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
         );
         panelPagoLayout.setVerticalGroup(
             panelPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,11 +185,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             panelCambioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCambioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCambioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)))
+                    .addComponent(labelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)))
         );
         panelCambioLayout.setVerticalGroup(
             panelCambioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +200,17 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                     .addComponent(labelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
+
+        botones1.setText("Cancelar");
+        botones1.setColor1(new java.awt.Color(166, 78, 78));
+        botones1.setColor2(new java.awt.Color(166, 78, 78));
+        botones1.setColor3(new java.awt.Color(166, 78, 78));
+
+        botones2.setBackground(new java.awt.Color(92, 153, 135));
+        botones2.setText("Aceptar");
+        botones2.setColor1(new java.awt.Color(54, 87, 77));
+        botones2.setColor2(new java.awt.Color(54, 87, 77));
+        botones2.setColor3(new java.awt.Color(54, 87, 77));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -211,6 +224,12 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(botones1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botones2, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addGap(265, 265, 265))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +239,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                     .addComponent(panelCambio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(104, 104, 104))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -238,6 +261,8 @@ public class ConfirmarVenta extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private UI.Botones botones1;
+    private UI.Botones botones2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;

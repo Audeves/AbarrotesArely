@@ -122,6 +122,13 @@
                   <Component id="panelCambio" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
+                  <Component id="botones1" min="-2" pref="372" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="botones2" pref="364" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -133,7 +140,12 @@
                       <Component id="panelPago" max="32767" attributes="0"/>
                       <Component id="panelTotal" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="botones1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botones2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -154,11 +166,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" pref="125" max="32767" attributes="0"/>
+                      <Component id="jLabel4" pref="130" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="labelTotal" alignment="0" pref="246" max="32767" attributes="0"/>
+                          <Component id="labelTotal" alignment="0" pref="251" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -227,11 +239,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" pref="125" max="32767" attributes="0"/>
+                      <Component id="jLabel7" pref="130" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                          <Component id="labelPago" alignment="0" pref="246" max="32767" attributes="0"/>
+                          <Component id="labelPago" alignment="0" pref="251" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -297,11 +309,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel16" pref="126" max="32767" attributes="0"/>
+                      <Component id="jLabel16" pref="131" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
-                          <Component id="labelCambio" alignment="0" pref="247" max="32767" attributes="0"/>
+                          <Component id="labelCambio" alignment="0" pref="252" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -355,6 +367,37 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="UI.Botones" name="botones1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4e" green="4e" red="a6" type="rgb"/>
+            </Property>
+            <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4e" green="4e" red="a6" type="rgb"/>
+            </Property>
+            <Property name="color3" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4e" green="4e" red="a6" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="UI.Botones" name="botones2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="87" green="99" red="5c" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Aceptar"/>
+            <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4d" green="57" red="36" type="rgb"/>
+            </Property>
+            <Property name="color2" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4d" green="57" red="36" type="rgb"/>
+            </Property>
+            <Property name="color3" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4d" green="57" red="36" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
