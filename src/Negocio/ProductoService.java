@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 package Negocio;
+
 import java.util.List;
 import java.util.Optional;
 
 import DAOs.ProductoDAO;
 import Entidades.Producto;
+
 /**
  *
  * @author Desktop
  */
 public class ProductoService {
+
     private final ProductoDAO productoDAO;
 
     public ProductoService() {
@@ -34,6 +37,10 @@ public class ProductoService {
 
     public Producto buscarProductoPorId(Integer id) {
         return productoDAO.buscarPorId(id);
+    }
+
+    public List<Producto> buscarPorNombre(String nombre) {
+        return productoDAO.buscarPorNombre(nombre);
     }
 
     public List<Producto> mostrarTodosLosProductos() {

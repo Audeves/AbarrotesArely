@@ -5,11 +5,20 @@
  */
 package UI;
 
+import Entidades.Producto;
+import Negocio.ProductoService;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,13 +26,15 @@ import javax.swing.JComponent;
  */
 public class RegistroVenta extends javax.swing.JFrame {
 
+    ProductoService productoService = new ProductoService();
+
     /**
      * Creates new form RegistroVenta
      */
     public RegistroVenta() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        
+
         //jLabel6.setIcon(setIcono("/UI/imagenes/precio.png", jLabel6));
 //        btnBuscar.setIcon(setIcono("/UI/imagenes/lupa.png", btnBuscar));
     }
@@ -38,7 +49,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     private void initComponents() {
 
         Header = new javax.swing.JPanel();
-        btnCerrar = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Header1 = new javax.swing.JPanel();
@@ -50,32 +61,32 @@ public class RegistroVenta extends javax.swing.JFrame {
         tablaTicket = new javax.swing.JTable();
         textTotal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jTotal = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabelTicket = new javax.swing.JLabel();
+        jAumentarCantidadAlProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Header.setBackground(new java.awt.Color(92, 153, 135));
 
-        btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuro.png"))); // NOI18N
-        btnCerrar.setText("Cerrar Sesión");
-        btnCerrar.setToolTipText("");
-        btnCerrar.setBorderPainted(false);
-        btnCerrar.setContentAreaFilled(false);
-        btnCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCerrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuro.png"))); // NOI18N
-        btnCerrar.setRequestFocusEnabled(false);
-        btnCerrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuroSelected.png"))); // NOI18N
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuro.png"))); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.setToolTipText("");
+        btnCerrarSesion.setBorderPainted(false);
+        btnCerrarSesion.setContentAreaFilled(false);
+        btnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuro.png"))); // NOI18N
+        btnCerrarSesion.setRequestFocusEnabled(false);
+        btnCerrarSesion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuroSelected.png"))); // NOI18N
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -102,7 +113,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
                 .addComponent(btnRegresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 797, Short.MAX_VALUE)
-                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(HeaderLayout.createSequentialGroup()
@@ -115,7 +126,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +154,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Código", "Nombre", "Precio", "Categoría", "Cantidad"
+                "ID", "Nombre", "Precio", "Stock", "Categoría", "Cantidad"
             }
         ));
         jScrollPane2.setViewportView(tablaProductos);
@@ -192,8 +203,8 @@ public class RegistroVenta extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
         jLabel2.setText("TOTAL");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 60)); // NOI18N
-        jLabel3.setText("000.00");
+        jTotal.setFont(new java.awt.Font("Dialog", 0, 60)); // NOI18N
+        jTotal.setText("000.00");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 60)); // NOI18N
         jLabel4.setText("$");
@@ -210,7 +221,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(textTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)))
+                    .addComponent(jTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         textTotalLayout.setVerticalGroup(
             textTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,14 +230,14 @@ public class RegistroVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(textTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         txtBuscar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         txtBuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtBuscar.setText("Buscar Producto");
-        txtBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -267,13 +278,13 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelar.png"))); // NOI18N
         btnCancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelarSelected.png"))); // NOI18N
 
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("TICKET");
+        jLabelTicket.setForeground(new java.awt.Color(51, 51, 51));
+        jLabelTicket.setText("TICKET");
 
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jAumentarCantidadAlProducto.setText("+");
+        jAumentarCantidadAlProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jAumentarCantidadAlProductoActionPerformed(evt);
             }
         });
 
@@ -285,7 +296,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Header1Layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(290, 290, 290))
                     .addGroup(Header1Layout.createSequentialGroup()
                         .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +308,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(8, 8, 8)
-                                .addComponent(jButton1)
+                                .addComponent(jAumentarCantidadAlProducto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -325,13 +336,13 @@ public class RegistroVenta extends javax.swing.JFrame {
                                 .addGap(18, 18, 18))
                             .addGroup(Header1Layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jAumentarCantidadAlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(btnRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(jLabelTicket)
                 .addGap(15, 15, 15)
                 .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
@@ -350,21 +361,83 @@ public class RegistroVenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jAumentarCantidadAlProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAumentarCantidadAlProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jAumentarCantidadAlProductoActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         ConfirmarVenta cv = new ConfirmarVenta();
         cv.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        
-    }//GEN-LAST:event_btnCerrarActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void limpiarTabla() {
+        DefaultTableModel modeloTablaProductos = (DefaultTableModel) tablaProductos.getModel();
+        modeloTablaProductos.setRowCount(0);
+    }
+
+    private void cargarProductos() {
+        ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaProductos.getModel();
+        modelo.setRowCount(0);
+        for (Producto producto : listaProductos) {
+            Object[] fila = new Object[5];
+            fila[0] = producto.getId();
+            fila[1] = producto.getNombreProducto();
+            fila[2] = producto.getPrecioActual();
+            fila[3] = producto.getStock();
+            fila[4] = producto.getCategoria();
+            modelo.addRow(fila);
+        }
+    }
+
+    private void buscarProductos() {
+        String nombre = this.txtBuscar.getText();
+        ArrayList<Producto> productos = new ArrayList<>();
+        DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
+        productos = (ArrayList<Producto>) this.productoService.buscarPorNombre(nombre);
+        xmodelo.setRowCount(0);
+        for (Producto producto : productos) {
+            Object[] fila = new Object[5];
+            fila[0] = producto.getId();
+            fila[1] = producto.getNombreProducto();
+            fila[2] = producto.getPrecioActual();
+            fila[3] = producto.getStock();
+            fila[4] = producto.getCategoria();
+            xmodelo.addRow(fila);
+        }
+        jAumentarCantidadAlProducto.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Obtener la fila seleccionada
+                    int filaSeleccionada = tablaProductos.getSelectedRow();
+
+                    if (filaSeleccionada >= 0) {
+                        // Obtener la cantidad actual del producto de la fila seleccionada
+                        Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
+
+                        // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
+                        if (cantidadActual == null) {
+                            tablaProductos.setValueAt(1, filaSeleccionada, 5);
+                        } else {
+                            int nuevaCantidad = cantidadActual + 1;
+                            tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
+                        }
+                    }
+                }
+            });
+    }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:   
+        if (this.txtBuscar.getText().length() > 0) {
+            this.buscarProductos();
+        } else {
+            this.cargarProductos();
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -402,14 +475,14 @@ public class RegistroVenta extends javax.swing.JFrame {
         });
     }
 
-    public Icon setIcono(String url, JComponent componente){
+    public Icon setIcono(String url, JComponent componente) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
+
         int ancho = componente.getWidth();
         int alto = componente.getHeight();
-        
+
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
+
         return icono;
     }
 
@@ -418,17 +491,17 @@ public class RegistroVenta extends javax.swing.JFrame {
     private javax.swing.JPanel Header1;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jAumentarCantidadAlProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelTicket;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jTotal;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel panelTicket;
     private javax.swing.JTable tablaProductos;
@@ -437,4 +510,3 @@ public class RegistroVenta extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
-

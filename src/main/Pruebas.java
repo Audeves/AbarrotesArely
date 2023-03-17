@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,43 +42,61 @@ public class Pruebas {
     public static void main(String[] args) {
         // TODO code application logic here
         Date date = new GregorianCalendar(2023, Calendar.MARCH, 9).getTime();
-        ProductoService ps = new ProductoService();
+        ProductoService productoService = new ProductoService();
 
         //Aqui insertamos el producto
-        Producto producto = new Producto("Marinela", 15, 100, "Gansitos");
-        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>(); 
+        Producto productoEntidad = new Producto("Coca-Cola", 40, 20, "3L");
+//        productoService.agregarProducto(productoEntidad);
+        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
+        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
+        productos.stream().map((producto) -> {
+            System.out.println("ID: " + producto.getId());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Nombre: " + producto.getNombreProducto());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Precio: " + producto.getPrecioActual());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Stock: " + producto.getStock());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Categoría: " + producto.getCategoria());
+            return producto;
+        }).forEachOrdered((_item) -> {
+            System.out.println("----------------------");
+        }); //        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>(); 
         //Aqui creamos la persona
-        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
-        Encargado encargado = new Encargado("JFKDND", persona);
-        listaEncargados.add(encargado);
-
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
-        EntityManager em = managerFactory.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            Persona personaBuscada = em.find(Persona.class, 1);
-            Producto productoBuscado = em.find(Producto.class, 1);
-            Encargado encargadoBuscado = em.find(Encargado.class, 1);
-            Venta ventaBuscada = em.find(Venta.class, 1);
-            Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
-            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
-//            encargado.setPersonaidPersona(personaBuscada);
+//        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
+//        Encargado encargado = new Encargado("JFKDND", persona);
+//        listaEncargados.add(encargado);
+//        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
+//        EntityManager em = managerFactory.createEntityManager();
+//        try {
+//            em.getTransaction().begin();
+//            Persona personaBuscada = em.find(Persona.class, 1);
+//            Producto productoBuscado = em.find(Producto.class, 1);
+//            Encargado encargadoBuscado = em.find(Encargado.class, 1);
+//            Venta ventaBuscada = em.find(Venta.class, 1);
+//            Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
+//            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
+////            encargado.setPersonaidPersona(personaBuscada);
+////
+////            em.persist(encargado);
+//        
+//            em.persist(relProductosVentas);
+//            
 //
-//            em.persist(encargado);
-        
-            em.persist(relProductosVentas);
-            
-
-
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        } finally {
-            em.close();
-        }
-
+//
+//            em.getTransaction().commit();
+//            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
+//        } catch (Exception e) {
+//            em.getTransaction().rollback();
+//            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
+//        } finally {
+//            em.close();
+//        }
 //        Persona person = new Persona();
 //        person.setCalle("Calle Miguelles");
 //        person.setCiudad("Obregón");

@@ -5,8 +5,10 @@
  */
 package DAOs;
 import Entidades.Producto;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -80,15 +82,34 @@ public class ProductoDAO extends BaseDAO<Producto>{
 
     @Override
     public List<Producto> mostrarTodas() {
-        EntityManager em = getEntityManager();
-        List<Producto> productos = null;
-        try {
-            TypedQuery<Producto> consulta = em.createQuery("SELECT p FROM Producto p", Producto.class);
-            productos = consulta.getResultList();
-        } finally {
-            em.close();
+        EntityManager em = this.getEntityManager();
+
+        Query consulta = em.createQuery("SELECT P FROM Producto p ");
+        em.getTransaction().begin();
+
+        List<Producto> productos = consulta.getResultList();
+
+        for (Producto productos1 : productos) {
+            System.out.println(productos1);
         }
-        return productos;
+        em.getTransaction().commit();
+        return new ArrayList<>(productos);
+    }
+    
+    public ArrayList<Producto> buscarPorNombre(String nombre) {
+        EntityManager em = this.getEntityManager();
+        em.getTransaction().begin();
+        List<Producto> productos;
+        if (!nombre.equals("")) {
+            String jpql = String.format("SELECT * FROM sistemapuntoventa.producto WHERE sistemapuntoventa.producto.nombreProducto LIKE '%%"+nombre+"%%'");
+            productos = em.createNativeQuery(jpql, Producto.class).getResultList();
+        } else {
+            String jpql = "SELECT * FROM sistemapuntoventa.producto;";
+            productos = em.createNativeQuery(jpql, Producto.class).getResultList();
+        }
+        em.getTransaction().commit();
+
+        return new ArrayList<>(productos);
     }
     
 }
