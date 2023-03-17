@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -63,9 +64,8 @@ public class Persona implements Serializable {
     
     @Column(name = "telefono", nullable = false)
     private String telefono;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Encargado> encargados;
-    
 
     public Persona() {
     }

@@ -24,6 +24,7 @@ public class ProductoService {
     }
 
     public void agregarProducto(Producto producto) {
+       
         productoDAO.agregar(producto);
     }
 

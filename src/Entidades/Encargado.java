@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,11 +46,11 @@ public class Encargado implements Serializable {
     @Column(name = "rfc", nullable = false)
     
     private String rfc;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encargado")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "encargado")
     private List<Venta> ventas;
     
     @JoinColumn(name = "idPersona", nullable = false)
-    @ManyToOne()
+    @OneToOne()
     private Persona persona;
 
     public Encargado() {
