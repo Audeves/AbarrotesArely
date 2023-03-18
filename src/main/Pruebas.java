@@ -47,10 +47,8 @@ public class Pruebas {
 
         //Aqui insertamos el producto
         Producto coca = new Producto("Coca Cola", 17, 10, "97 ml");
-        Producto nito = new Producto("Coca Cola", 17, 10, "97 ml");
-        Producto empanada = new Producto("Coca Cola", 17, 10, "97 ml");
-        Producto pastel = new Producto("Coca Cola", 17, 10, "97 ml");
-        productoService.agregarProducto(coca);
+        Producto nito = new Producto("Nito", 22, 5, "97 gr");
+//        productoService.agregarProducto(coca);
         productoService.agregarProducto(nito);
         
 //        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
