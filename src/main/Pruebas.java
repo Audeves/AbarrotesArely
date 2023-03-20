@@ -46,7 +46,7 @@ public class Pruebas {
         ProductoService productoService = new ProductoService();
 
         //Aqui insertamos el producto
-        Producto coca = new Producto("Coca Cola", 17, 10, "97 ml");
+      //  Producto coca = new Producto("Coca Cola", 17, 10, "97 ml");
         Producto nito = new Producto("Nito", 22, 5, "97 gr");
 //        productoService.agregarProducto(coca);
         productoService.agregarProducto(nito);

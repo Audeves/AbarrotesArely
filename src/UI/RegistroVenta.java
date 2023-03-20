@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +35,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     public RegistroVenta() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        cargarProductos();
 
         //jLabel6.setIcon(setIcono("/UI/imagenes/precio.png", jLabel6));
 //        btnBuscar.setIcon(setIcono("/UI/imagenes/lupa.png", btnBuscar));
@@ -93,6 +95,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuro.png"))); // NOI18N
         btnRegresar.setText("Regresar");
+        btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
         btnRegresar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRegresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnVerdeOscuroSelected.png"))); // NOI18N
@@ -112,7 +115,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
                 .addComponent(btnRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 797, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 770, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,28 +145,41 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Stock", "Categoría", "Cantidad"
+                "ID", "Nombre", "Precio", "Stock", "Categoría", "Cantidad", "", ""
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaProductos);
 
         javax.swing.GroupLayout panelProductosLayout = new javax.swing.GroupLayout(panelProductos);
         panelProductos.setLayout(panelProductosLayout);
         panelProductosLayout.setHorizontalGroup(
             panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
         );
         panelProductosLayout.setVerticalGroup(
             panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +213,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         );
         panelTicketLayout.setVerticalGroup(
             panelTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
         );
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
@@ -238,6 +254,11 @@ public class RegistroVenta extends javax.swing.JFrame {
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtBuscar.setText("Buscar Producto");
         txtBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBuscarMouseClicked(evt);
+            }
+        });
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
@@ -245,6 +266,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         });
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/lupa.png"))); // NOI18N
+        btnBuscar.setBorderPainted(false);
         btnBuscar.setContentAreaFilled(false);
         btnBuscar.setMaximumSize(new java.awt.Dimension(524, 520));
         btnBuscar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/lupa.png"))); // NOI18N
@@ -273,6 +295,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelar.png"))); // NOI18N
@@ -281,7 +304,16 @@ public class RegistroVenta extends javax.swing.JFrame {
         jLabelTicket.setForeground(new java.awt.Color(51, 51, 51));
         jLabelTicket.setText("TICKET");
 
+        jAumentarCantidadAlProducto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jAumentarCantidadAlProducto.setForeground(new java.awt.Color(255, 255, 255));
+        jAumentarCantidadAlProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregar.png"))); // NOI18N
         jAumentarCantidadAlProducto.setText("+");
+        jAumentarCantidadAlProducto.setBorderPainted(false);
+        jAumentarCantidadAlProducto.setContentAreaFilled(false);
+        jAumentarCantidadAlProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jAumentarCantidadAlProducto.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregar.png"))); // NOI18N
+        jAumentarCantidadAlProducto.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregarSelected.png"))); // NOI18N
+        jAumentarCantidadAlProducto.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregarSelected.png"))); // NOI18N
         jAumentarCantidadAlProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAumentarCantidadAlProductoActionPerformed(evt);
@@ -303,13 +335,15 @@ public class RegistroVenta extends javax.swing.JFrame {
                             .addGroup(Header1Layout.createSequentialGroup()
                                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(Header1Layout.createSequentialGroup()
+                                        .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jAumentarCantidadAlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8))
+                                    .addGroup(Header1Layout.createSequentialGroup()
                                         .addComponent(txtBuscar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(8, 8, 8)
-                                .addComponent(jAumentarCantidadAlProducto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(4, 4, 4)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(61, 61, 61)))
                                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -322,26 +356,24 @@ public class RegistroVenta extends javax.swing.JFrame {
             .addGroup(Header1Layout.createSequentialGroup()
                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Header1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtBuscar)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(Header1Layout.createSequentialGroup()
                         .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(Header1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18))
-                            .addGroup(Header1Layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addComponent(jAumentarCantidadAlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jAumentarCantidadAlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(Header1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)))
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addComponent(jLabelTicket)
                 .addGap(15, 15, 15)
                 .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -380,18 +412,34 @@ public class RegistroVenta extends javax.swing.JFrame {
     }
 
     private void cargarProductos() {
+        //Renderización de la tabla para que puedan añadirse componentes dentro
+        //de las celdas
+        tablaProductos.setDefaultRenderer(Object.class, new Render());
+        //Botones que se general al compilar
+        JButton btnAumentar = new JButton();
+        btnAumentar.setName("aumentar");
+        btnAumentar.setText("+");
+        JButton btnDisminuir = new JButton();
+        btnDisminuir.setName("disminuir");
+        btnDisminuir.setText("-");
+        
+        
         ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
         DefaultTableModel modelo = (DefaultTableModel) this.tablaProductos.getModel();
         modelo.setRowCount(0);
+      
         for (Producto producto : listaProductos) {
-            Object[] fila = new Object[5];
+            Object[] fila = new Object[8];
             fila[0] = producto.getId();
             fila[1] = producto.getNombreProducto();
             fila[2] = producto.getPrecioActual();
             fila[3] = producto.getStock();
             fila[4] = producto.getCategoria();
+            fila[5] = "0"; //Este es el campo de cantidad
+            fila[6] = btnAumentar;
+            fila[7] = btnDisminuir;
             modelo.addRow(fila);
-        }
+        } 
     }
 
     private void buscarProductos() {
@@ -432,13 +480,40 @@ public class RegistroVenta extends javax.swing.JFrame {
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (this.txtBuscar.getText().length() > 0) {
+        if (this.txtBuscar.getText().length() > 0 && !txtBuscar.getText().equals("Buscar Producto")) {
             this.buscarProductos();
+            
         } else {
             this.cargarProductos();
-        }
-        
+            txtBuscar.setText("Buscar Producto");
+        }     
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
+        txtBuscar.setText("");
+    }//GEN-LAST:event_txtBuscarMouseClicked
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        int column = tablaProductos.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY()/tablaProductos.getRowHeight();
+        
+        if(row < tablaProductos.getRowCount() && row >= 0 && column < tablaProductos.getColumnCount() && column >= 0){
+            Object value = tablaProductos.getValueAt(row, column);
+            if(value instanceof JButton){
+                ((JButton)value).doClick();
+                JButton boton = (JButton) value;
+                                
+                if(boton.getName().equals("aumentar")){
+                    //Aquí va el evento del botón aumentar
+                    System.out.println("Se aumentó");
+                }
+                if(boton.getName().equals("disminuir")){
+                    //Aquí va el evento del botón disminuir
+                    System.out.println("Se disminuyó");
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaProductosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -485,6 +560,9 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         return icono;
     }
+    
+   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Header;
