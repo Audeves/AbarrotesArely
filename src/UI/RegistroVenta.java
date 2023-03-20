@@ -413,6 +413,59 @@ public class RegistroVenta extends javax.swing.JFrame {
     }
 
     private void cargarProductos() {
+       ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaProductos.getModel();
+        modelo.setRowCount(0);
+      
+        for (Producto producto : listaProductos) {
+            Object[] fila = new Object[8];
+            fila[0] = producto.getId();
+            fila[1] = producto.getNombreProducto();
+            fila[2] = producto.getPrecioActual();
+            fila[3] = producto.getStock();
+            fila[4] = producto.getCategoria();
+            modelo.addRow(fila);
+        } 
+    }
+    
+
+    private void quantityManage(java.awt.event.MouseEvent evt){
+        //Renderización de la tabla para que puedan añadirse componentes dentro
+        //de las celdas
+        tablaProductos.setDefaultRenderer(Object.class, new Render());
+        //Botones que se general al compilar
+        JButton btnAumentar = new JButton();
+        btnAumentar.setName("aumentar");
+        btnAumentar.setText("+");
+        JButton btnDisminuir = new JButton();
+        btnDisminuir.setName("disminuir");
+        btnDisminuir.setText("-");
+        int column = tablaProductos.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY()/tablaProductos.getRowHeight();
+        
+        if(row < tablaProductos.getRowCount() && row >= 0 && column < tablaProductos.getColumnCount() && column >= 0){
+            Object value = tablaProductos.getValueAt(row, column);
+            if(value instanceof JButton){
+                ((JButton)value).doClick();
+                JButton boton = (JButton) value;
+                                
+                if(boton.getName().equals("aumentar")){
+                    //Aquí va el evento del botón aumentar
+                    System.out.println("Se aumentó");
+                }
+                if(boton.getName().equals("disminuir")){
+                    //Aquí va el evento del botón disminuir
+                    System.out.println("Se disminuyó");
+                }
+                if(boton.getName().equals("borrar")){
+                    //Aquí va el evento del botón borrar
+                    System.out.println("Ya se borró");
+                }
+            }
+        }
+    }
+    
+    private void buscarProductos() {
         //Renderización de la tabla para que puedan añadirse componentes dentro
         //de las celdas
         tablaProductos.setDefaultRenderer(Object.class, new Render());
@@ -424,12 +477,12 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnDisminuir.setName("disminuir");
         btnDisminuir.setText("-");
         
-        
-        ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
-        DefaultTableModel modelo = (DefaultTableModel) this.tablaProductos.getModel();
-        modelo.setRowCount(0);
-      
-        for (Producto producto : listaProductos) {
+        String nombre = this.txtBuscar.getText();
+        ArrayList<Producto> productos = new ArrayList<>();
+        DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
+        productos = (ArrayList<Producto>) this.productoService.buscarPorNombre(nombre);
+        xmodelo.setRowCount(0);
+        for (Producto producto : productos) {
             Object[] fila = new Object[8];
             fila[0] = producto.getId();
             fila[1] = producto.getNombreProducto();
@@ -439,24 +492,6 @@ public class RegistroVenta extends javax.swing.JFrame {
             fila[5] = "0"; //Este es el campo de cantidad
             fila[6] = btnAumentar;
             fila[7] = btnDisminuir;
-            modelo.addRow(fila);
-        } 
-    }
-    
-
-    private void buscarProductos() {
-        String nombre = this.txtBuscar.getText();
-        ArrayList<Producto> productos = new ArrayList<>();
-        DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
-        productos = (ArrayList<Producto>) this.productoService.buscarPorNombre(nombre);
-        xmodelo.setRowCount(0);
-        for (Producto producto : productos) {
-            Object[] fila = new Object[5];
-            fila[0] = producto.getId();
-            fila[1] = producto.getNombreProducto();
-            fila[2] = producto.getPrecioActual();
-            fila[3] = producto.getStock();
-            fila[4] = producto.getCategoria();
             xmodelo.addRow(fila);
         }
         btnAgregar.addActionListener(new ActionListener() {

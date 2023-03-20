@@ -11,7 +11,7 @@ public class ConexionBD {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/sistemapuntoventa"; // URL de la base de datos
         String usuario = "root"; // Usuario de la base de datos
-        String password = "sesamo"; // Contraseña de la base de datos
+        String password = "1234"; // Contraseña de la base de datos
 
         try {
             try ( // Conexión a la base de datos
