@@ -64,7 +64,7 @@ public class Persona implements Serializable {
     
     @Column(name = "telefono", nullable = false)
     private String telefono;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
     private List<Encargado> encargados;
 
     public Persona() {

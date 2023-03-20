@@ -46,11 +46,11 @@ public class Encargado implements Serializable {
     @Column(name = "rfc", nullable = false)
     
     private String rfc;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "encargado")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "encargado")
     private List<Venta> ventas;
     
     @JoinColumn(name = "idPersona", nullable = false)
-    @OneToOne()
+    @ManyToOne()
     private Persona persona;
 
     public Encargado() {
