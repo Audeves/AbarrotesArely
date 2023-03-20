@@ -29,6 +29,7 @@ public class RegistroVenta extends javax.swing.JFrame {
 
     ProductoService productoService = new ProductoService();
 
+
     /**
      * Creates new form RegistroVenta
      */
@@ -70,7 +71,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabelTicket = new javax.swing.JLabel();
-        jAumentarCantidadAlProducto = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,19 +189,19 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         tablaTicket.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Precio/Precio Granel", "Cantidad", "Subtotal", "Borrar"
+                "Nombre", "Precio/Precio Granel", "Cantidad", "Subtotal", "Borrar"
             }
         ));
         jScrollPane1.setViewportView(tablaTicket);
@@ -304,19 +305,19 @@ public class RegistroVenta extends javax.swing.JFrame {
         jLabelTicket.setForeground(new java.awt.Color(51, 51, 51));
         jLabelTicket.setText("TICKET");
 
-        jAumentarCantidadAlProducto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jAumentarCantidadAlProducto.setForeground(new java.awt.Color(255, 255, 255));
-        jAumentarCantidadAlProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregar.png"))); // NOI18N
-        jAumentarCantidadAlProducto.setText("+");
-        jAumentarCantidadAlProducto.setBorderPainted(false);
-        jAumentarCantidadAlProducto.setContentAreaFilled(false);
-        jAumentarCantidadAlProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jAumentarCantidadAlProducto.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregar.png"))); // NOI18N
-        jAumentarCantidadAlProducto.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregarSelected.png"))); // NOI18N
-        jAumentarCantidadAlProducto.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregarSelected.png"))); // NOI18N
-        jAumentarCantidadAlProducto.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregar.png"))); // NOI18N
+        btnAgregar.setText("+");
+        btnAgregar.setBorderPainted(false);
+        btnAgregar.setContentAreaFilled(false);
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgregar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregar.png"))); // NOI18N
+        btnAgregar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregarSelected.png"))); // NOI18N
+        btnAgregar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/botonAgregarSelected.png"))); // NOI18N
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAumentarCantidadAlProductoActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -337,7 +338,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                                     .addGroup(Header1Layout.createSequentialGroup()
                                         .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jAumentarCantidadAlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(8, 8, 8))
                                     .addGroup(Header1Layout.createSequentialGroup()
                                         .addComponent(txtBuscar)
@@ -364,7 +365,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                         .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(Header1Layout.createSequentialGroup()
-                                .addComponent(jAumentarCantidadAlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(Header1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -393,9 +394,9 @@ public class RegistroVenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
-    private void jAumentarCantidadAlProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAumentarCantidadAlProductoActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jAumentarCantidadAlProductoActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         ConfirmarVenta cv = new ConfirmarVenta();
@@ -441,6 +442,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             modelo.addRow(fila);
         } 
     }
+    
 
     private void buscarProductos() {
         String nombre = this.txtBuscar.getText();
@@ -457,7 +459,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             fila[4] = producto.getCategoria();
             xmodelo.addRow(fila);
         }
-        jAumentarCantidadAlProducto.addActionListener(new ActionListener() {
+        btnAgregar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Obtener la fila seleccionada
@@ -466,7 +468,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                     if (filaSeleccionada >= 0) {
                         // Obtener la cantidad actual del producto de la fila seleccionada
                         Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
-
+                        cargarTicket();
                         // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
                         if (cantidadActual == null) {
                             tablaProductos.setValueAt(1, filaSeleccionada, 5);
@@ -477,6 +479,30 @@ public class RegistroVenta extends javax.swing.JFrame {
                     }
                 }
             });
+    }
+    private void cargarTicket() {
+        //Renderización de la tabla para que puedan añadirse componentes dentro
+        //de las celdas
+        tablaTicket.setDefaultRenderer(Object.class, new Render());
+        //Botones que se general al compilar
+        JButton btnBorrar = new JButton();
+        btnBorrar.setName("borrar");
+        btnBorrar.setText("Delete");
+   
+        
+        ArrayList<Producto> ticket = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
+        modelo.setRowCount(0);
+      
+        for (Producto producto : ticket) {
+            Object[] fila = new Object[5];
+            fila[0] = producto.getNombreProducto();
+            fila[1] = producto.getPrecioActual();
+            fila[2] = "0";
+            fila[3] = "0";
+            fila[4] = btnBorrar;
+            modelo.addRow(fila);
+        } 
     }
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -510,6 +536,10 @@ public class RegistroVenta extends javax.swing.JFrame {
                 if(boton.getName().equals("disminuir")){
                     //Aquí va el evento del botón disminuir
                     System.out.println("Se disminuyó");
+                }
+                if(boton.getName().equals("borrar")){
+                    //Aquí va el evento del botón borrar
+                    System.out.println("Ya se borró");
                 }
             }
         }
@@ -567,12 +597,12 @@ public class RegistroVenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Header;
     private javax.swing.JPanel Header1;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton jAumentarCantidadAlProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
