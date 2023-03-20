@@ -51,6 +51,7 @@ public class Pruebas {
 //        productoService.agregarProducto(coca);
         productoService.agregarProducto(nito);
         
+        
 //        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
 //        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
 //        productos.stream().map((producto) -> {
