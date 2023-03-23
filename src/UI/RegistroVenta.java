@@ -30,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Desktop
+ * actualizacion
  */
 public class RegistroVenta extends javax.swing.JFrame {
 
