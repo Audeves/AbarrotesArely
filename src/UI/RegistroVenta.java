@@ -488,7 +488,6 @@ public class RegistroVenta extends javax.swing.JFrame {
         JButton btnDisminuir = new JButton();
         btnDisminuir.setName("disminuir");
         btnDisminuir.setText("-");
-
         String nombre = this.txtBuscar.getText();
         ArrayList<Producto> productos = new ArrayList<>();
         DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
