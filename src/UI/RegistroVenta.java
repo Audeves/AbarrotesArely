@@ -7,7 +7,9 @@ package UI;
 
 import Entidades.Producto;
 import Negocio.ProductoService;
+import java.awt.Component;
 import java.awt.Image;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +33,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     ProductoService productoService = new ProductoService();
 
     int cantidad = 0;
+
     /**
      * Creates new form RegistroVenta
      */
@@ -62,6 +66,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         panelTicket = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaTicket = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         textTotal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTotal = new javax.swing.JLabel();
@@ -189,23 +194,14 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         tablaTicket.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Precio/Precio Granel", "Cantidad", "Subtotal", "Borrar"
+                "Nombre", "Precio/Precio Granel", "Cantidad", "Subtotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -214,15 +210,30 @@ public class RegistroVenta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaTicket);
 
+        jButton1.setText("Borrar Producto");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelTicketLayout = new javax.swing.GroupLayout(panelTicket);
         panelTicket.setLayout(panelTicketLayout);
         panelTicketLayout.setHorizontalGroup(
             panelTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(panelTicketLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelTicketLayout.setVerticalGroup(
             panelTicketLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTicketLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
@@ -309,6 +320,11 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelar.png"))); // NOI18N
         btnCancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelarSelected.png"))); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabelTicket.setForeground(new java.awt.Color(51, 51, 51));
         jLabelTicket.setText("TICKET");
@@ -338,7 +354,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Header1Layout.createSequentialGroup()
                         .addComponent(jLabelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(290, 290, 290))
+                        .addGap(326, 326, 326))
                     .addGroup(Header1Layout.createSequentialGroup()
                         .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Header1Layout.createSequentialGroup()
@@ -354,7 +370,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(61, 61, 61)))
                                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(textTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -403,23 +419,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // Obtener la fila seleccionada en la tabla de productos
-        int selectedRow = tablaProductos.getSelectedRow();
-	int columnaCantidad;
-        if (selectedRow != -1) {
-            // Obtener los datos de la fila seleccionada
-            Object[] rowData = new Object[tablaProductos.getColumnCount()];
-            for (int i = 0; i < rowData.length; i++) {
-                
-                rowData[i] = tablaProductos.getValueAt(selectedRow, i);
-                System.out.println(selectedRow);
-            }
-            
-            // Añadir la fila a la tabla de los tickets
-//            ((DefaultTableModel) tablaTicket.getModel()).addRow(rowData);
-            // Eliminar la fila de la tabla 1
-            ((DefaultTableModel) tablaProductos.getModel()).removeRow(selectedRow);
-        }
+        limpiarTabla();
         cantidad = 0;
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -431,6 +431,28 @@ public class RegistroVenta extends javax.swing.JFrame {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
 
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+    private void cargarTicket() {
+        //Renderización de la tabla para que puedan añadirse componentes dentro
+        //de las celdas
+        tablaTicket.setDefaultRenderer(Object.class, new Render());
+        //Botones que se general al compilar
+        JButton btnBorrar = new JButton();
+        btnBorrar.setName("borrar");
+        btnBorrar.setText("Delete");
+
+        int[] productos = tablaProductos.getSelectedRows();
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
+        DefaultTableModel tablaProductos = (DefaultTableModel) this.tablaProductos.getModel();
+        Object[] filaSeleccionada = new Object[tablaProductos.getColumnCount()];
+        
+        for (int i = 0; i < productos.length; i++) {
+            filaSeleccionada[0] = tablaProductos.getValueAt(productos[i], 1);
+            filaSeleccionada[1] = tablaProductos.getValueAt(productos[i], 2);
+            filaSeleccionada[2] = tablaProductos.getValueAt(productos[i], 5);
+            filaSeleccionada[3] = Float.parseFloat(tablaProductos.getValueAt(productos[i], 2).toString()) * Float.parseFloat(tablaProductos.getValueAt(productos[i], 5).toString());
+            modelo.addRow(filaSeleccionada);
+        }
+    }
 
     private void limpiarTabla() {
         DefaultTableModel modeloTablaProductos = (DefaultTableModel) tablaProductos.getModel();
@@ -438,10 +460,9 @@ public class RegistroVenta extends javax.swing.JFrame {
     }
 
     private void cargarProductos() {
-       ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+        ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
         DefaultTableModel modelo = (DefaultTableModel) this.tablaProductos.getModel();
         modelo.setRowCount(0);
-      
         for (Producto producto : listaProductos) {
             Object[] fila = new Object[5];
             fila[0] = producto.getId();
@@ -450,9 +471,10 @@ public class RegistroVenta extends javax.swing.JFrame {
             fila[3] = producto.getStock();
             fila[4] = producto.getCategoria();
             modelo.addRow(fila);
-        } 
+        }
+
     }
-    
+
     private void buscarProductos() {
         //Renderización de la tabla para que puedan añadirse componentes dentro
         //de las celdas
@@ -464,7 +486,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         JButton btnDisminuir = new JButton();
         btnDisminuir.setName("disminuir");
         btnDisminuir.setText("-");
-        
+
         String nombre = this.txtBuscar.getText();
         ArrayList<Producto> productos = new ArrayList<>();
         DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
@@ -483,66 +505,36 @@ public class RegistroVenta extends javax.swing.JFrame {
             xmodelo.addRow(fila);
         }
         btnAgregar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Obtener la fila seleccionada
-                    int filaSeleccionada = tablaProductos.getSelectedRow();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la fila seleccionada
+                int filaSeleccionada = tablaProductos.getSelectedRow();
 
-                    if (filaSeleccionada >= 0) {
-                        // Obtener la cantidad actual del producto de la fila seleccionada
-                        Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
-                        cargarTicket();
-                        // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
-                        if (cantidadActual == null) {
-                            tablaProductos.setValueAt(1, filaSeleccionada, 5);
-                        } else {
-                            int nuevaCantidad = cantidadActual + 1;
-                            tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
-                        }
+                if (filaSeleccionada >= 0) {
+                    // Obtener la cantidad actual del producto de la fila seleccionada
+                    Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
+                    cargarTicket();
+                    // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
+                    if (cantidadActual == null) {
+                        tablaProductos.setValueAt(1, filaSeleccionada, 5);
+                    } else {
+                        int nuevaCantidad = cantidadActual + 1;
+                        tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
                     }
                 }
-            });
-    }
-    private void cargarTicket() {
-        //Renderización de la tabla para que puedan añadirse componentes dentro
-        //de las celdas
-        tablaTicket.setDefaultRenderer(Object.class, new Render());
-        //Botones que se general al compilar
-        JButton btnBorrar = new JButton();
-        btnBorrar.setName("borrar");
-        btnBorrar.setText("Delete");
-        
-        int pos = tablaProductos.getSelectedRow();
-        
-        ArrayList<Producto> ticket = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
-//        DefaultTableModel tabProds = (DefaultTableModel) this.tablaProductos.getModel();
-        DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
-        modelo.setRowCount(0);
-        for (Producto producto : ticket) {
-            Object[] fila = new Object[5];
-            fila[0] = producto.getNombreProducto();
-            fila[1] = producto.getPrecioActual();
-            fila[2] = cantidad;
-            fila[3] = cantidad*producto.getPrecioActual();
-            fila[4] = btnBorrar;
-            if (pos !=-1) {
-                modelo.addRow(fila);
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Debe de seleccionar un articulo");
-            }
-            
-        } 
+        });
     }
+
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (this.txtBuscar.getText().length() > 0 && !txtBuscar.getText().equals("Buscar Producto")) {
             this.buscarProductos();
-            
+
         } else {
             this.cargarProductos();
             txtBuscar.setText("Buscar Producto");
-        }     
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
@@ -551,29 +543,29 @@ public class RegistroVenta extends javax.swing.JFrame {
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
         int column = tablaProductos.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tablaProductos.getRowHeight();
-        
-        if(row < tablaProductos.getRowCount() && row >= 0 && column < tablaProductos.getColumnCount() && column >= 0){
+        int row = evt.getY() / tablaProductos.getRowHeight();
+
+        if (row < tablaProductos.getRowCount() && row >= 0 && column < tablaProductos.getColumnCount() && column >= 0) {
             Object value = tablaProductos.getValueAt(row, column);
-            if(value instanceof JButton){
-                ((JButton)value).doClick();
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
                 JButton boton = (JButton) value;
-                                
-                if(boton.getName().equals("aumentar")){
-                    if(boton.getName().equals("aumentar")){
+
+                if (boton.getName().equals("aumentar")) {
+                    if (boton.getName().equals("aumentar")) {
                         cantidad += 1;
                     }
                     tablaProductos.setValueAt(cantidad, row, 5);
                     System.out.println("Se aumentó");
                 }
-                if(boton.getName().equals("disminuir")){
-                    if (cantidad > 0 ) {
+                if (boton.getName().equals("disminuir")) {
+                    if (cantidad > 0) {
                         cantidad -= 1;
                     }
                     tablaProductos.setValueAt(cantidad, row, 5);
                     System.out.println("Se disminuyó");
                 }
-                if(boton.getName().equals("borrar")){
+                if (boton.getName().equals("borrar")) {
                     //Aquí va el evento del botón borrar
                     DefaultTableModel model = (DefaultTableModel) tablaTicket.getModel();
                     int selectedRowIndex = tablaTicket.getSelectedRow();
@@ -583,6 +575,42 @@ public class RegistroVenta extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tablaTicket.getModel();
+
+        // Obtener el índice de la fila seleccionada
+        int indiceFilaSeleccionada = tablaTicket.getSelectedRow();
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Deseas Eliminar el Producto Seleccionado", "Confirmación",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "No");
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            if (indiceFilaSeleccionada != -1) {
+                modelo.removeRow(indiceFilaSeleccionada);
+            }
+        } else {
+            ((Window) SwingUtilities.getRoot((Component) evt.getSource())).dispose();
+        }
+        // Eliminar la fila seleccionada
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        int indiceFilaSeleccionada = tablaTicket.getSelectedRow();
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Deseas Cancelar la venta en progreso?", "Confirmación",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "No");
+        DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            if (indiceFilaSeleccionada != -1) {
+                JOptionPane.showConfirmDialog(this, "Sin valores por borrar.");
+            } else {
+                modelo.setRowCount(0);
+            }
+        } else {
+            ((Window) SwingUtilities.getRoot((Component) evt.getSource())).dispose();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -629,8 +657,6 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         return icono;
     }
-    
-   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -642,6 +668,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
