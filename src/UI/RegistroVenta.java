@@ -283,11 +283,6 @@ public class RegistroVenta extends javax.swing.JFrame {
                 txtBuscarMouseClicked(evt);
             }
         });
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/lupa.png"))); // NOI18N
         btnBuscar.setBorderPainted(false);
@@ -417,10 +412,6 @@ public class RegistroVenta extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         limpiarTabla();

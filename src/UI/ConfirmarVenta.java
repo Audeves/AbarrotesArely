@@ -310,7 +310,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.disable();
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
