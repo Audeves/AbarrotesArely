@@ -29,7 +29,7 @@ public class RegistroVenta extends javax.swing.JFrame {
 
     ProductoService productoService = new ProductoService();
 
-
+    int cantidad = 0;
     /**
      * Creates new form RegistroVenta
      */
@@ -203,7 +203,15 @@ public class RegistroVenta extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Precio/Precio Granel", "Cantidad", "Subtotal", "Borrar"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaTicket);
 
         javax.swing.GroupLayout panelTicketLayout = new javax.swing.GroupLayout(panelTicket);
@@ -395,7 +403,24 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        // Obtener la fila seleccionada en la tabla de productos
+        int selectedRow = tablaProductos.getSelectedRow();
+	int columnaCantidad;
+        if (selectedRow != -1) {
+            // Obtener los datos de la fila seleccionada
+            Object[] rowData = new Object[tablaProductos.getColumnCount()];
+            for (int i = 0; i < rowData.length; i++) {
+                
+                rowData[i] = tablaProductos.getValueAt(selectedRow, i);
+                System.out.println(selectedRow);
+            }
+            
+            // Añadir la fila a la tabla de los tickets
+//            ((DefaultTableModel) tablaTicket.getModel()).addRow(rowData);
+            // Eliminar la fila de la tabla 1
+            ((DefaultTableModel) tablaProductos.getModel()).removeRow(selectedRow);
+        }
+        cantidad = 0;
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -418,7 +443,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         modelo.setRowCount(0);
       
         for (Producto producto : listaProductos) {
-            Object[] fila = new Object[8];
+            Object[] fila = new Object[5];
             fila[0] = producto.getId();
             fila[1] = producto.getNombreProducto();
             fila[2] = producto.getPrecioActual();
@@ -426,43 +451,6 @@ public class RegistroVenta extends javax.swing.JFrame {
             fila[4] = producto.getCategoria();
             modelo.addRow(fila);
         } 
-    }
-    
-
-    private void quantityManage(java.awt.event.MouseEvent evt){
-        //Renderización de la tabla para que puedan añadirse componentes dentro
-        //de las celdas
-        tablaProductos.setDefaultRenderer(Object.class, new Render());
-        //Botones que se general al compilar
-        JButton btnAumentar = new JButton();
-        btnAumentar.setName("aumentar");
-        btnAumentar.setText("+");
-        JButton btnDisminuir = new JButton();
-        btnDisminuir.setName("disminuir");
-        btnDisminuir.setText("-");
-        int column = tablaProductos.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tablaProductos.getRowHeight();
-        
-        if(row < tablaProductos.getRowCount() && row >= 0 && column < tablaProductos.getColumnCount() && column >= 0){
-            Object value = tablaProductos.getValueAt(row, column);
-            if(value instanceof JButton){
-                ((JButton)value).doClick();
-                JButton boton = (JButton) value;
-                                
-                if(boton.getName().equals("aumentar")){
-                    //Aquí va el evento del botón aumentar
-                    System.out.println("Se aumentó");
-                }
-                if(boton.getName().equals("disminuir")){
-                    //Aquí va el evento del botón disminuir
-                    System.out.println("Se disminuyó");
-                }
-                if(boton.getName().equals("borrar")){
-                    //Aquí va el evento del botón borrar
-                    System.out.println("Ya se borró");
-                }
-            }
-        }
     }
     
     private void buscarProductos() {
@@ -523,20 +511,27 @@ public class RegistroVenta extends javax.swing.JFrame {
         JButton btnBorrar = new JButton();
         btnBorrar.setName("borrar");
         btnBorrar.setText("Delete");
-   
+        
+        int pos = tablaProductos.getSelectedRow();
         
         ArrayList<Producto> ticket = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+//        DefaultTableModel tabProds = (DefaultTableModel) this.tablaProductos.getModel();
         DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
         modelo.setRowCount(0);
-      
         for (Producto producto : ticket) {
             Object[] fila = new Object[5];
             fila[0] = producto.getNombreProducto();
             fila[1] = producto.getPrecioActual();
-            fila[2] = "0";
-            fila[3] = "0";
+            fila[2] = cantidad;
+            fila[3] = cantidad*producto.getPrecioActual();
             fila[4] = btnBorrar;
-            modelo.addRow(fila);
+            if (pos !=-1) {
+                modelo.addRow(fila);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Debe de seleccionar un articulo");
+            }
+            
         } 
     }
 
@@ -565,15 +560,24 @@ public class RegistroVenta extends javax.swing.JFrame {
                 JButton boton = (JButton) value;
                                 
                 if(boton.getName().equals("aumentar")){
-                    //Aquí va el evento del botón aumentar
+                    if(boton.getName().equals("aumentar")){
+                        cantidad += 1;
+                    }
+                    tablaProductos.setValueAt(cantidad, row, 5);
                     System.out.println("Se aumentó");
                 }
                 if(boton.getName().equals("disminuir")){
-                    //Aquí va el evento del botón disminuir
+                    if (cantidad > 0 ) {
+                        cantidad -= 1;
+                    }
+                    tablaProductos.setValueAt(cantidad, row, 5);
                     System.out.println("Se disminuyó");
                 }
                 if(boton.getName().equals("borrar")){
                     //Aquí va el evento del botón borrar
+                    DefaultTableModel model = (DefaultTableModel) tablaTicket.getModel();
+                    int selectedRowIndex = tablaTicket.getSelectedRow();
+                    model.removeRow(selectedRowIndex);
                     System.out.println("Ya se borró");
                 }
             }

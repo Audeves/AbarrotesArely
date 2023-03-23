@@ -46,10 +46,11 @@ public class Pruebas {
         ProductoService productoService = new ProductoService();
 
         //Aqui insertamos el producto
-      //  Producto coca = new Producto("Coca Cola", 17, 10, "97 ml");
-        Producto nito = new Producto("Nito", 22, 5, "97 gr");
+        Producto coca = new Producto("Coca Cola", 17, 10, "97 ml");
+        Producto coca2 = new Producto("Coke cola", 17, 10, "97 ml");
+//        Producto nito = new Producto("Nito", 22, 5, "97 gr");
 //        productoService.agregarProducto(coca);
-        productoService.agregarProducto(nito);
+        productoService.agregarProducto(coca2);
         
 //        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
 //        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
