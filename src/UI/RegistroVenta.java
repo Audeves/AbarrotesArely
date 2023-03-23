@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +41,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     public RegistroVenta() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        cargarProductos();
+        //cargarProductos();
 
         //jLabel6.setIcon(setIcono("/UI/imagenes/precio.png", jLabel6));
 //        btnBuscar.setIcon(setIcono("/UI/imagenes/lupa.png", btnBuscar));
@@ -452,6 +453,8 @@ public class RegistroVenta extends javax.swing.JFrame {
             filaSeleccionada[3] = Float.parseFloat(tablaProductos.getValueAt(productos[i], 2).toString()) * Float.parseFloat(tablaProductos.getValueAt(productos[i], 5).toString());
             modelo.addRow(filaSeleccionada);
         }
+        
+        cargarTotal();
     }
 
     private void limpiarTabla() {
@@ -514,6 +517,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                     // Obtener la cantidad actual del producto de la fila seleccionada
                     Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
                     cargarTicket();
+                    
                     // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
                     if (cantidadActual == null) {
                         tablaProductos.setValueAt(1, filaSeleccionada, 5);
@@ -524,6 +528,20 @@ public class RegistroVenta extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    private void cargarTotal(){
+        
+        float total = 0;
+        
+        for (int i = 0; i < this.tablaTicket.getRowCount(); i++) {
+            total += Float.parseFloat(this.tablaTicket.getValueAt(i, 3).toString());
+            
+        }
+        System.out.println("total: " + total);
+        
+        String totalView = String.format("%06.2f", total);
+        this.jTotal.setText(totalView);
     }
 
 
@@ -587,6 +605,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         if (respuesta == JOptionPane.YES_OPTION) {
             if (indiceFilaSeleccionada != -1) {
                 modelo.removeRow(indiceFilaSeleccionada);
+                cargarTotal();
             }
         } else {
             ((Window) SwingUtilities.getRoot((Component) evt.getSource())).dispose();
