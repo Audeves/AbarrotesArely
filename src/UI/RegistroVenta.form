@@ -172,7 +172,7 @@
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnRegistrar" pref="474" max="32767" attributes="0"/>
+                                      <Component id="btnRegistrar" max="32767" attributes="0"/>
                                       <Component id="btnCancelar" alignment="0" max="32767" attributes="0"/>
                                       <Component id="textTotal" alignment="1" max="32767" attributes="0"/>
                                   </Group>
@@ -443,6 +443,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="000.00"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -467,7 +470,10 @@
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Buscar Producto"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
+            </Property>
+            <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
           <Events>

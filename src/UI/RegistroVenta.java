@@ -20,8 +20,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,7 +36,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     ProductoService productoService = new ProductoService();
 
     int cantidad = 0;
-
+    public static String txtTotal = "";  
     /**
      * Creates new form RegistroVenta
      */
@@ -275,6 +277,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtBuscar.setText("Buscar Producto");
         txtBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtBuscar.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtBuscarMouseClicked(evt);
@@ -371,7 +374,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(61, 61, 61)))
                                 .addGroup(Header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(textTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(panelTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -457,9 +460,14 @@ public class RegistroVenta extends javax.swing.JFrame {
         cargarTotal();
     }
 
-    private void limpiarTabla() {
+    public void limpiarTabla() {
         DefaultTableModel modeloTablaProductos = (DefaultTableModel) tablaProductos.getModel();
         modeloTablaProductos.setRowCount(0);
+    }
+    
+    public void limpiarTablaTicket() {
+        DefaultTableModel modeloTablaTicket = (DefaultTableModel) tablaTicket.getModel();
+        modeloTablaTicket.setRowCount(0);
     }
 
     private void cargarProductos() {
@@ -542,6 +550,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         
         String totalView = String.format("%06.2f", total);
         this.jTotal.setText(totalView);
+        txtTotal = jTotal.getText();
     }
 
 
@@ -694,7 +703,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTicket;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel jTotal;
+    public javax.swing.JLabel jTotal;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel panelTicket;
     private javax.swing.JTable tablaProductos;

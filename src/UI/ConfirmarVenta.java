@@ -4,19 +4,49 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author itzel
  */
 public class ConfirmarVenta extends javax.swing.JFrame {
 
+    
+    
+    
     /**
      * Creates new form ConfirmarVenta
      */
     public ConfirmarVenta() {
         initComponents();
         setLocationRelativeTo(null);
+        RegistroVenta rV = new RegistroVenta();
+        this.labelTotal.setText(rV.txtTotal);
+        calcularCambio();
     }
+    
+    
+    
+    private void calcularCambio(){
+        String importe;
+        String total = this.labelTotal.getText();
+        float Importe = 0, cambio = 0, Total = 0;
+        Total = Float.parseFloat(total);
+        do {            
+            importe = JOptionPane.showInputDialog("INGRESA EL IMPORTE $ ");
+            Importe = Float.parseFloat(importe);
+            if (Total > Importe) {
+                JOptionPane.showMessageDialog(null, "El importe debe de ser mayor al total");
+            }
+        } while (Total > Importe);
+        importe = String.format("%06.2f",Importe);
+        this.labelPago.setText(String.valueOf(importe));
+        cambio = Importe - Total;
+        String vuelto = String.format("%06.2f", cambio);
+        this.labelCambio.setText(String.valueOf(vuelto));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,6 +238,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelar.png"))); // NOI18N
         btnCancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelarSelected.png"))); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnAceptar.png"))); // NOI18N
@@ -216,6 +251,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         btnAceptar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAceptar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnAceptar.png"))); // NOI18N
         btnAceptar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnAceptarSelected.png"))); // NOI18N
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -259,6 +299,19 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        JOptionPane.showMessageDialog(null, "VENTA GUARDADA");
+        RegistroVenta rv = new RegistroVenta();
+        rv.limpiarTabla();
+        rv.limpiarTablaTicket();
+        rv.jTotal.setText("$000.00");
+        this.dispose();
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.disable();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
