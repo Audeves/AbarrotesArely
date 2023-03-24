@@ -42,7 +42,8 @@ public class RegistroVenta extends javax.swing.JFrame {
     public static DefaultTableModel modelo;
     public static DefaultTableModel modelo2;
     int id, stock;
-    String categoria, nombre, cantidadVendida;
+    String categoria, nombre; 
+    public static  int cantidadVendida;
     float precio;
     public static ArrayList<Producto> listaProductos = new ArrayList<>();
     public static ArrayList<String> listaTicket = new ArrayList<>();
@@ -433,7 +434,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             }else{
 //                modelo = (DefaultTableModel) tablaProductos.getModel();
 //                modelo2 = (DefaultTableModel) tablaTicket.getModel();
-                cantidadVendida = tablaTicket.getValueAt(row, 2).toString();
+                cantidadVendida = Integer.parseInt(tablaTicket.getValueAt(row, 2).toString());
                 System.out.println("cantidad Vendida "+cantidadVendida);
                 id = Integer.parseInt(tablaProductos.getValueAt(row, 0).toString());
                 categoria = tablaProductos.getValueAt(row, 4).toString();
@@ -453,7 +454,6 @@ public class RegistroVenta extends javax.swing.JFrame {
                 prod.setPrecioActual(precio);
                 prod.setStock(stock);
                 listaProductos.add(prod);
-                listaTicket.add(cantidadVendida);
 //                ArrayList<Producto> listaProductos2 = new ArrayList<>();
 //                listaProductos.add(prod);
 //                listaProductos = listaProductos2;
