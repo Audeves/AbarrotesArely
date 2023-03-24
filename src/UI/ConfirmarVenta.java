@@ -4,16 +4,27 @@
  */
 package UI;
 
+import Entidades.Producto;
+import Negocio.ProductoService;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author itzel
  */
 public class ConfirmarVenta extends javax.swing.JFrame {
+    private RegistroVenta registroVenta;
 
     
-    
+    ArrayList<Producto> listaCarrito = new ArrayList<>();
+    ArrayList<String> listaTicket2 = new ArrayList<>();
+    int id, stock;
+    String categoria, nombre, cVendida;
+    float precio;
     
     /**
      * Creates new form ConfirmarVenta
@@ -21,12 +32,30 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     public ConfirmarVenta() {
         initComponents();
         setLocationRelativeTo(null);
-        RegistroVenta rV = new RegistroVenta();
-        this.labelTotal.setText(rV.txtTotal);
+        this.listaCarrito = registroVenta.listaProductos;
+        this.listaTicket2 = registroVenta.listaTicket;
+//        RegistroVenta rV = new RegistroVenta();
+        this.labelTotal.setText(registroVenta.txtTotal);
+        Persistencia();
         calcularCambio();
     }
     
-    
+    public void Persistencia(){
+        for (int i = 0; i < listaCarrito.size(); i++) {
+            id = listaCarrito.get(i).getId();
+            categoria = listaCarrito.get(i).getCategoria();
+            nombre = listaCarrito.get(i).getNombreProducto();
+            precio = listaCarrito.get(i).getPrecioActual();
+            stock = listaCarrito.get(i).getStock();
+        }
+        for (int i = 0; i < listaTicket2.size(); i++) {
+            System.out.println(listaTicket2);
+        }
+        Producto producto = new Producto(id, nombre, precio, stock , categoria);
+        
+        ProductoService productoService = new ProductoService();
+        productoService.actualizarProducto(producto);
+    }
     
     private void calcularCambio(){
         String importe;
@@ -302,10 +331,13 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         JOptionPane.showMessageDialog(null, "VENTA GUARDADA");
-        RegistroVenta rv = new RegistroVenta();
-        rv.limpiarTabla();
-        rv.limpiarTablaTicket();
-        rv.jTotal.setText("$000.00");
+//        RegistroVenta rv2 = new RegistroVenta();
+//        registroVenta.limpiarTabla();
+//        registroVenta.limpiarTablaTicket();
+//        registroVenta.jTotal.setText("$000.00");
+
+//        textoTotal = "$000.00";
+        
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

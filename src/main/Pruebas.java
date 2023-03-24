@@ -50,7 +50,7 @@ public class Pruebas {
       
 //        Producto nito = new Producto("Nito", 22, 5, "97 gr");
 //        productoService.agregarProducto(coca);
-        productoService.agregarProducto(coca2);
+//        productoService.agregarProducto(coca2);
         
 //        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
 //        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
@@ -74,33 +74,33 @@ public class Pruebas {
 //        }); 
 //        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>();
 //        //Aqui creamos la persona
-//        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
+        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
 //        PersonaService personaService = new PersonaService();
-//        //personaService.agregarPersona(persona);
-//        Encargado encargado = new Encargado("JFKDND", persona);
+//        personaService.agregarPersona(persona);
+        Encargado encargado = new Encargado("JFKDND", persona);
 //        listaEncargados.add(encargado);
-//        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
-//        EntityManager em = managerFactory.createEntityManager();
-//        try {
-//            em.getTransaction().begin();
-//            Persona personaBuscada = em.find(Persona.class, 1);
-////            Producto productoBuscado = em.find(Producto.class, 1);
-////            Encargado encargadoBuscado = em.find(Encargado.class, 1);
-////            Venta ventaBuscada = em.find(Venta.class, 1);
-//            //Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
-//            //RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
-//            encargado.setPersonaidPersona(personaBuscada);
-//            em.persist(encargado);
-//
-//            // em.persist(persona);
-//            em.getTransaction().commit();
-//            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
-//        } catch (Exception e) {
-//            em.getTransaction().rollback();
-//            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-//        } finally {
-//            em.close();
-//        }
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
+        EntityManager em = managerFactory.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Persona personaBuscada = em.find(Persona.class, 1);
+//            Producto productoBuscado = em.find(Producto.class, 1);
+//            Encargado encargadoBuscado = em.find(Encargado.class, 1);
+//            Venta ventaBuscada = em.find(Venta.class, 1);
+            //Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
+            //RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
+            encargado.setPersonaidPersona(personaBuscada);
+            em.persist(encargado);
+
+            // em.persist(persona);
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
+        } finally {
+            em.close();
+        }
 //        Persona person = new Persona();
 //        person.setCalle("Calle Miguelles");
 //        person.setCiudad("Obregón");

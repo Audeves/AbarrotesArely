@@ -53,19 +53,18 @@ public class ProductoDAO extends BaseDAO<Producto>{
     }
 
     @Override
-    public void actualizar(Producto entidad) {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.merge(entidad);
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "El producto se actualizó correctamente.", "Información", INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Error al actualizar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        } finally {
-            em.close();
+    public void actualizar(Producto producto) {
+        EntityManager em = this.getEntityManager();
+
+        Producto productoX = em.find(Producto.class, producto.getId());
+        if (productoX != null) {
+            productoX.setStock(producto.getStock());
+            em.persist(productoX);
+        } else {
+            throw new IllegalArgumentException("El producto no existe");
         }
+        em.getTransaction().commit();
+        System.out.println("El producto se actualizó ");
     }
 
     @Override

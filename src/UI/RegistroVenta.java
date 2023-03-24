@@ -23,9 +23,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -35,17 +37,25 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroVenta extends javax.swing.JFrame {
 
     ProductoService productoService = new ProductoService();
-
     int cantidad = 0;
     public static String txtTotal = "";  
+    public static DefaultTableModel modelo;
+    public static DefaultTableModel modelo2;
+    int id, stock;
+    String categoria, nombre, cantidadVendida;
+    float precio;
+    public static ArrayList<Producto> listaProductos = new ArrayList<>();
+    public static ArrayList<String> listaTicket = new ArrayList<>();
+    
+
     /**
      * Creates new form RegistroVenta
      */
     public RegistroVenta() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+//        this.jTotal.setText(cF.textoTotal);
         //cargarProductos();
-
         //jLabel6.setIcon(setIcono("/UI/imagenes/precio.png", jLabel6));
 //        btnBuscar.setIcon(setIcono("/UI/imagenes/lupa.png", btnBuscar));
     }
@@ -415,6 +425,44 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+        int row = this.tablaProductos.getSelectedRow();
+        try {
+            if (row==-1) {
+                System.out.println("no hay una fila");
+            }else{
+//                modelo = (DefaultTableModel) tablaProductos.getModel();
+//                modelo2 = (DefaultTableModel) tablaTicket.getModel();
+                cantidadVendida = tablaTicket.getValueAt(row, 2).toString();
+                System.out.println("cantidad Vendida "+cantidadVendida);
+                id = Integer.parseInt(tablaProductos.getValueAt(row, 0).toString());
+                categoria = tablaProductos.getValueAt(row, 4).toString();
+                nombre = tablaProductos.getValueAt(row, 1).toString();
+                precio = Float.parseFloat(tablaProductos.getValueAt(row, 2).toString());
+                stock = Integer.parseInt(tablaProductos.getValueAt(row, 3).toString());
+//                System.out.println("pasa por aqui");
+//                System.out.println("id "+id);
+//                System.out.println("categoria "+categoria);
+//                System.out.println("nombre "+nombre);
+//                System.out.println("precio "+precio);
+//                System.out.println("stock "+stock);
+                Producto prod = new Producto();
+                prod.setId(id);
+                prod.setCategoria(categoria);
+                prod.setNombreProducto(nombre);
+                prod.setPrecioActual(precio);
+                prod.setStock(stock);
+                listaProductos.add(prod);
+                listaTicket.add(cantidadVendida);
+//                ArrayList<Producto> listaProductos2 = new ArrayList<>();
+//                listaProductos.add(prod);
+//                listaProductos = listaProductos2;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
         limpiarTabla();
         cantidad = 0;
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -422,6 +470,8 @@ public class RegistroVenta extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         ConfirmarVenta cv = new ConfirmarVenta();
         cv.setVisible(true);
+        jTotal.setText("000.00");
+        limpiarTablaTicket();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -493,6 +543,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         ArrayList<Producto> productos = new ArrayList<>();
         DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
         productos = (ArrayList<Producto>) this.productoService.buscarPorNombre(nombre);
+        listaProductos = productos;
         xmodelo.setRowCount(0);
         for (Producto producto : productos) {
             Object[] fila = new Object[8];
