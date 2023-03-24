@@ -7,6 +7,7 @@ package UI;
 import Entidades.Producto;
 import Negocio.ProductoService;
 import java.util.ArrayList;
+import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,15 +18,15 @@ import javax.swing.table.TableModel;
  * @author itzel
  */
 public class ConfirmarVenta extends javax.swing.JFrame {
+
     private RegistroVenta registroVenta;
 
-    
     ArrayList<Producto> listaCarrito = new ArrayList<>();
     ArrayList<String> listaTicket2 = new ArrayList<>();
     int id, stock;
     String categoria, nombre, cVendida;
     float precio;
-    
+
     /**
      * Creates new form ConfirmarVenta
      */
@@ -39,8 +40,8 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         Persistencia();
         calcularCambio();
     }
-    
-    public void Persistencia(){
+
+    public void Persistencia() {
         for (int i = 0; i < listaCarrito.size(); i++) {
             id = listaCarrito.get(i).getId();
             categoria = listaCarrito.get(i).getCategoria();
@@ -49,10 +50,10 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             stock = listaCarrito.get(i).getStock();
         }
         for (int i = 0; i < listaTicket2.size(); i++) {
-            System.out.println(listaTicket2);
+            cVendida = listaTicket2.get(i);
         }
 //        Producto producto = new Producto(id, nombre, precio, stock , categoria);
-        
+
         ProductoService productoService = new ProductoService();
         String nombreProducto = nombre; // nombre de producto a buscar
         ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
@@ -75,26 +76,25 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             System.out.println("----------------------");
         });
     }
-    
-    private void calcularCambio(){
+
+    private void calcularCambio() {
         String importe;
         String total = this.labelTotal.getText();
         float Importe = 0, cambio = 0, Total = 0;
         Total = Float.parseFloat(total);
-        do {            
+        do {
             importe = JOptionPane.showInputDialog("INGRESA EL IMPORTE $ ");
             Importe = Float.parseFloat(importe);
             if (Total > Importe) {
                 JOptionPane.showMessageDialog(null, "El importe debe de ser mayor al total");
             }
         } while (Total > Importe);
-        importe = String.format("%06.2f",Importe);
+        importe = String.format("%06.2f", Importe);
         this.labelPago.setText(String.valueOf(importe));
         cambio = Importe - Total;
         String vuelto = String.format("%06.2f", cambio);
         this.labelCambio.setText(String.valueOf(vuelto));
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -349,6 +349,18 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+        ProductoService productoService = new ProductoService();
+        Producto productoBD = productoService.buscarProductoPorId(id);
+        for (int i = 0; i < listaTicket2.size(); i++) {
+            cVendida = listaTicket2.get(i);
+        }
+        int canVendida = Integer.parseInt(cVendida);
+
+        int stocA = productoBD.getStock() - canVendida;
+        productoBD.setStock(stocA);
+        productoService.actualizarProducto(productoBD);
+
         JOptionPane.showMessageDialog(null, "VENTA GUARDADA");
 //        RegistroVenta rv2 = new RegistroVenta();
 //        registroVenta.limpiarTabla();
@@ -356,7 +368,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 //        registroVenta.jTotal.setText("$000.00");
 
 //        textoTotal = "$000.00";
-        
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -367,7 +378,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

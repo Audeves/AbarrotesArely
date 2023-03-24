@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package DAOs;
+
 import Entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +14,12 @@ import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+
 /**
  *
  * @author Desktop
  */
-public class ProductoDAO extends BaseDAO<Producto>{
+public class ProductoDAO extends BaseDAO<Producto> {
 
     @Override
     public void agregar(Producto entidad) {
@@ -54,16 +56,32 @@ public class ProductoDAO extends BaseDAO<Producto>{
 
     @Override
     public void actualizar(Producto producto) {
-        EntityManager em = this.getEntityManager();
+//        EntityManager em = this.getEntityManager();
+//
+//        Producto productoX = em.find(Producto.class, producto.getId());
+//        if (productoX != null) {
+//            productoX.setStock(producto.getStock());
+//            em.persist(productoX);
+//        } else {
+//            throw new IllegalArgumentException("El producto no existe");
+//        }
+//        em.getTransaction().commit();
+//        System.out.println("El producto se actualizó ");
 
-        Producto productoX = em.find(Producto.class, producto.getId());
-        if (productoX != null) {
-            productoX.setStock(producto.getStock());
-            em.persist(productoX);
-        } else {
-            throw new IllegalArgumentException("El producto no existe");
+        EntityManager em = this.getEntityManager();
+        try {
+            if (producto != null) {
+            em.getTransaction().begin();
+            em.merge(producto);
+            em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Error al actualizar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
+        }finally{
+            em.close();
         }
-        em.getTransaction().commit();
+
         System.out.println("El producto se actualizó ");
     }
 
@@ -90,13 +108,13 @@ public class ProductoDAO extends BaseDAO<Producto>{
         em.getTransaction().commit();
         return new ArrayList<>(productos);
     }
-    
+
     public ArrayList<Producto> buscarPorNombre(String nombre) {
         EntityManager em = this.getEntityManager();
         em.getTransaction().begin();
         List<Producto> productos;
         if (!nombre.equals("")) {
-            String jpql = String.format("SELECT * FROM sistemapuntoventa.producto WHERE sistemapuntoventa.producto.nombreProducto LIKE '%%"+nombre+"%%'");
+            String jpql = String.format("SELECT * FROM sistemapuntoventa.producto WHERE sistemapuntoventa.producto.nombreProducto LIKE '%%" + nombre + "%%'");
             productos = em.createNativeQuery(jpql, Producto.class).getResultList();
         } else {
             String jpql = "SELECT * FROM sistemapuntoventa.producto;";
@@ -106,5 +124,5 @@ public class ProductoDAO extends BaseDAO<Producto>{
 
         return new ArrayList<>(productos);
     }
-    
+
 }

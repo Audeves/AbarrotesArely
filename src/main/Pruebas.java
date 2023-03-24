@@ -16,6 +16,7 @@ import Negocio.PersonaService;
 import Negocio.ProductoService;
 import Negocio.VentaService;
 import Negocio.VentasService;
+import UI.RegistroVenta;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,32 +43,34 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Date date = new GregorianCalendar(2023, Calendar.MARCH, 9).getTime();
-        ProductoService productoService = new ProductoService();
-
-        //Aqui insertamos el producto
-        Producto coca2 = new Producto("Coca Cola", 17, 10, "600 ml");
-//        productoService.buscarPorNombre("Coca Cola");
-        String nombreProducto = "Coca Cola"; // nombre de producto a buscar
-        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
-        productos.stream().map((producto) -> {
-            System.out.println("ID: " + producto.getId());
-            return producto;
-        }).map((producto) -> {
-            System.out.println("Nombre: " + producto.getNombreProducto());
-            return producto;
-        }).map((producto) -> {
-            System.out.println("Precio: " + producto.getPrecioActual());
-            return producto;
-        }).map((producto) -> {
-            System.out.println("Stock: " + producto.getStock());
-            return producto;
-        }).map((producto) -> {
-            System.out.println("Categoría: " + producto.getCategoria());
-            return producto;
-        }).forEachOrdered((_item) -> {
-            System.out.println("----------------------");
-        });
+        RegistroVenta rV = new RegistroVenta();
+        rV.show();
+//        Date date = new GregorianCalendar(2023, Calendar.MARCH, 9).getTime();
+//        ProductoService productoService = new ProductoService();
+//
+//        //Aqui insertamos el producto
+//        Producto coca2 = new Producto("Coca Cola", 17, 10, "600 ml");
+////        productoService.buscarPorNombre("Coca Cola");
+//        String nombreProducto = "Coca Cola"; // nombre de producto a buscar
+//        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
+//        productos.stream().map((producto) -> {
+//            System.out.println("ID: " + producto.getId());
+//            return producto;
+//        }).map((producto) -> {
+//            System.out.println("Nombre: " + producto.getNombreProducto());
+//            return producto;
+//        }).map((producto) -> {
+//            System.out.println("Precio: " + producto.getPrecioActual());
+//            return producto;
+//        }).map((producto) -> {
+//            System.out.println("Stock: " + producto.getStock());
+//            return producto;
+//        }).map((producto) -> {
+//            System.out.println("Categoría: " + producto.getCategoria());
+//            return producto;
+//        }).forEachOrdered((_item) -> {
+//            System.out.println("----------------------");
+//        });
 //        productoService.actualizarProducto(coca2);
       
 //        Producto nito = new Producto("Nito", 22, 5, "97 gr");
