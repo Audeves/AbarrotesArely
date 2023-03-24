@@ -69,14 +69,10 @@ public class ProductoDAO extends BaseDAO<Producto>{
 
     @Override
     public Producto buscarPorId(Integer id) {
-        EntityManager em = getEntityManager();
-        Producto producto = null;
-        try {
-            producto = em.find(Producto.class, id);
-        } finally {
-            em.close();
-        }
-        return producto;
+        EntityManager em = this.getEntityManager();
+        em.getTransaction().begin();
+        em.getTransaction().commit();
+        return em.find(Producto.class, id);
     }
 
     @Override

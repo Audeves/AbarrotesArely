@@ -51,10 +51,29 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         for (int i = 0; i < listaTicket2.size(); i++) {
             System.out.println(listaTicket2);
         }
-        Producto producto = new Producto(id, nombre, precio, stock , categoria);
+//        Producto producto = new Producto(id, nombre, precio, stock , categoria);
         
         ProductoService productoService = new ProductoService();
-        productoService.actualizarProducto(producto);
+        String nombreProducto = nombre; // nombre de producto a buscar
+        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
+        productos.stream().map((producto) -> {
+            System.out.println("ID: " + producto.getId());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Nombre: " + producto.getNombreProducto());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Precio: " + producto.getPrecioActual());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Stock: " + producto.getStock());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Categoría: " + producto.getCategoria());
+            return producto;
+        }).forEachOrdered((_item) -> {
+            System.out.println("----------------------");
+        });
     }
     
     private void calcularCambio(){

@@ -46,7 +46,29 @@ public class Pruebas {
         ProductoService productoService = new ProductoService();
 
         //Aqui insertamos el producto
-        Producto coca2 = new Producto("Nitos", 17, 10, "97 ml");
+        Producto coca2 = new Producto("Coca Cola", 17, 10, "600 ml");
+//        productoService.buscarPorNombre("Coca Cola");
+        String nombreProducto = "Coca Cola"; // nombre de producto a buscar
+        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
+        productos.stream().map((producto) -> {
+            System.out.println("ID: " + producto.getId());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Nombre: " + producto.getNombreProducto());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Precio: " + producto.getPrecioActual());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Stock: " + producto.getStock());
+            return producto;
+        }).map((producto) -> {
+            System.out.println("Categoría: " + producto.getCategoria());
+            return producto;
+        }).forEachOrdered((_item) -> {
+            System.out.println("----------------------");
+        });
+//        productoService.actualizarProducto(coca2);
       
 //        Producto nito = new Producto("Nito", 22, 5, "97 gr");
 //        productoService.agregarProducto(coca);
@@ -74,33 +96,33 @@ public class Pruebas {
 //        }); 
 //        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>();
 //        //Aqui creamos la persona
-        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
+//        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
 //        PersonaService personaService = new PersonaService();
 //        personaService.agregarPersona(persona);
-        Encargado encargado = new Encargado("JFKDND", persona);
+//        Encargado encargado = new Encargado("JFKDND", persona);
 //        listaEncargados.add(encargado);
-        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
-        EntityManager em = managerFactory.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            Persona personaBuscada = em.find(Persona.class, 1);
+//        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
+//        EntityManager em = managerFactory.createEntityManager();
+//        try {
+//            em.getTransaction().begin();
+//            Persona personaBuscada = em.find(Persona.class, 1);
 //            Producto productoBuscado = em.find(Producto.class, 1);
 //            Encargado encargadoBuscado = em.find(Encargado.class, 1);
 //            Venta ventaBuscada = em.find(Venta.class, 1);
             //Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
             //RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
-            encargado.setPersonaidPersona(personaBuscada);
-            em.persist(encargado);
-
-            // em.persist(persona);
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        } finally {
-            em.close();
-        }
+//            encargado.setPersonaidPersona(personaBuscada);
+//            em.persist(encargado);
+//
+//            // em.persist(persona);
+//            em.getTransaction().commit();
+//            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
+//        } catch (Exception e) {
+//            em.getTransaction().rollback();
+//            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
+//        } finally {
+//            em.close();
+//        }
 //        Persona person = new Persona();
 //        person.setCalle("Calle Miguelles");
 //        person.setCiudad("Obregón");
