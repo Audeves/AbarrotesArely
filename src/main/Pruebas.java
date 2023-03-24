@@ -45,7 +45,7 @@ public class Pruebas {
         // TODO code application logic here
         RegistroVenta rV = new RegistroVenta();
         rV.show();
-//        Date date = new GregorianCalendar(2023, Calendar.MARCH, 9).getTime();
+        Date date = new GregorianCalendar(Calendar.YEAR, Calendar.MARCH, Calendar.DAY_OF_MONTH).getTime();
 //        ProductoService productoService = new ProductoService();
 //
 //        //Aqui insertamos el producto
@@ -112,12 +112,12 @@ public class Pruebas {
 //            Producto productoBuscado = em.find(Producto.class, 1);
 //            Encargado encargadoBuscado = em.find(Encargado.class, 1);
 //            Venta ventaBuscada = em.find(Venta.class, 1);
-            //Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
-            //RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
-//            encargado.setPersonaidPersona(personaBuscada);
-//            em.persist(encargado);
+//            Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
+//            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
+////            encargado.setPersonaidPersona(personaBuscada);
+////            em.persist(encargado);
 //
-//            // em.persist(persona);
+//             em.persist(venta);
 //            em.getTransaction().commit();
 //            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
 //        } catch (Exception e) {

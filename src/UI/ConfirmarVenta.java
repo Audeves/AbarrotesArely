@@ -4,11 +4,22 @@
  */
 package UI;
 
+import Entidades.Encargado;
+import Entidades.Persona;
 import Entidades.Producto;
+import Entidades.RelProductosVentas;
+import Entidades.Venta;
 import Negocio.ProductoService;
+import Negocio.VentaService;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -26,6 +37,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     int id, stock;
     String categoria, nombre, cVendida;
     float precio;
+    String total;
 
     /**
      * Creates new form ConfirmarVenta
@@ -77,9 +89,15 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         });
     }
 
+    public static Date obtenerFechaActual() {
+        Date fechaActual = new Date();
+        return fechaActual;
+    }
+    
     private void calcularCambio() {
         String importe;
-        String total = this.labelTotal.getText();
+        total = this.labelTotal.getText();
+        
         float Importe = 0, cambio = 0, Total = 0;
         Total = Float.parseFloat(total);
         do {
@@ -349,22 +367,52 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        Date fechaActual = obtenerFechaActual();
+        System.out.println("Fecha actual: " + fechaActual);
+        
         ProductoService productoService = new ProductoService();
-        int canVendida = Integer.parseInt(cVendida);
+//        int canVendida = Integer.parseInt(cVendida);
         Producto productoBD = productoService.buscarProductoPorId(id);
-        int stocA = productoBD.getStock() - canVendida;
+        int stocA = productoBD.getStock() - 1;
         productoBD.setStock(stocA);
         productoService.actualizarProducto(productoBD);
-
-        JOptionPane.showMessageDialog(null, "VENTA GUARDADA");
+        
+        float ventaTotal = Float.parseFloat(labelTotal.getText());
+//        JOptionPane.showMessageDialog(null, "VENTA GUARDADA");
 //        RegistroVenta rv2 = new RegistroVenta();
 //        registroVenta.limpiarTabla();
 //        registroVenta.limpiarTablaTicket();
 //        registroVenta.jTotal.setText("$000.00");
-
+        
 //        textoTotal = "$000.00";
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
+        EntityManager em = managerFactory.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Persona personaBuscada = em.find(Persona.class, 1);
+            Producto productoBuscado = em.find(Producto.class, 1);
+            Encargado encargadoBuscado = em.find(Encargado.class, 1);
+            Venta ventaBuscada = em.find(Venta.class, 1);
+            Venta venta = new Venta((float) ventaTotal, fechaActual, encargadoBuscado);
+//            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
+            
+            VentaService venSer = new VentaService();
+            venSer.agregarVenta(venta);
+//            encargado.setPersonaidPersona(personaBuscada);
+//            em.persist(encargado);
+
+//             em.persist(venta);
+//            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
+        } finally {
+            em.close();
+        }
+        
         this.dispose();
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

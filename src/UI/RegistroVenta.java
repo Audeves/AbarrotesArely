@@ -486,18 +486,27 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnBorrar.setName("borrar");
         btnBorrar.setText("Delete");
 
-        int[] productos = tablaProductos.getSelectedRows();
+        int row = tablaProductos.getSelectedRow();
         DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
         DefaultTableModel tablaProductos = (DefaultTableModel) this.tablaProductos.getModel();
-        Object[] filaSeleccionada = new Object[tablaProductos.getColumnCount()];
         
-        for (int i = 0; i < productos.length; i++) {
-            filaSeleccionada[0] = tablaProductos.getValueAt(productos[i], 1);
-            filaSeleccionada[1] = tablaProductos.getValueAt(productos[i], 2);
-            filaSeleccionada[2] = tablaProductos.getValueAt(productos[i], 5);
-            filaSeleccionada[3] = Float.parseFloat(tablaProductos.getValueAt(productos[i], 2).toString()) * Float.parseFloat(tablaProductos.getValueAt(productos[i], 5).toString());
-            modelo.addRow(filaSeleccionada);
-        }
+        
+        String name;
+        float price, subTotal;
+        
+        name = tablaProductos.getValueAt(row, 1).toString();
+        price = (float) tablaProductos.getValueAt(row, 2);
+        subTotal = price * cantidad;
+        Object[] products = {name, price, cantidad, subTotal};
+        modelo.addRow(products);
+        
+//        for (int i = 0; i < productos.length; i++) {
+//            filaSeleccionada[0] = tablaProductos.getValueAt(productos[i], 1);
+//            filaSeleccionada[1] = tablaProductos.getValueAt(productos[i], 2);
+//            filaSeleccionada[2] = tablaProductos.getValueAt(productos[i], 5);
+//            filaSeleccionada[3] = Float.parseFloat(tablaProductos.getValueAt(productos[i], 2).toString()) * Float.parseFloat(tablaProductos.getValueAt(productos[i], 5).toString());
+//            modelo.addRow(filaSeleccionada);
+//        }
         
         cargarTotal();
     }
