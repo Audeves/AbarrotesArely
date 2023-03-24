@@ -351,12 +351,8 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
 
         ProductoService productoService = new ProductoService();
-        Producto productoBD = productoService.buscarProductoPorId(id);
-        for (int i = 0; i < listaTicket2.size(); i++) {
-            cVendida = listaTicket2.get(i);
-        }
         int canVendida = Integer.parseInt(cVendida);
-
+        Producto productoBD = productoService.buscarProductoPorId(id);
         int stocA = productoBD.getStock() - canVendida;
         productoBD.setStock(stocA);
         productoService.actualizarProducto(productoBD);
