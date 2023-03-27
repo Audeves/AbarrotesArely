@@ -45,7 +45,7 @@ public class Pruebas {
         // TODO code application logic here
         RegistroVenta rV = new RegistroVenta();
         rV.show();
-        Date date = new GregorianCalendar(Calendar.YEAR, Calendar.MARCH, Calendar.DAY_OF_MONTH).getTime();
+//        Date date = new GregorianCalendar(Calendar.YEAR, Calendar.MARCH, Calendar.DAY_OF_MONTH).getTime();
 //        ProductoService productoService = new ProductoService();
 //
 //        //Aqui insertamos el producto
@@ -73,8 +73,8 @@ public class Pruebas {
 //        });
 //        productoService.actualizarProducto(coca2);
       
-//        Producto nito = new Producto("Nito", 22, 5, "97 gr");
-//        productoService.agregarProducto(coca);
+//        Producto producto = new Producto("Pepsi", 30, 10, "2 L");
+//        productoService.agregarProducto(producto);
 //        productoService.agregarProducto(coca2);
         
 //        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
@@ -98,10 +98,10 @@ public class Pruebas {
 //            System.out.println("----------------------");
 //        }); 
 //        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>();
-//        //Aqui creamos la persona
+////        //Aqui creamos la persona
 //        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
-//        PersonaService personaService = new PersonaService();
-//        personaService.agregarPersona(persona);
+////        PersonaService personaService = new PersonaService();
+////        personaService.agregarPersona(persona);
 //        Encargado encargado = new Encargado("JFKDND", persona);
 //        listaEncargados.add(encargado);
 //        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
@@ -111,13 +111,13 @@ public class Pruebas {
 //            Persona personaBuscada = em.find(Persona.class, 1);
 //            Producto productoBuscado = em.find(Producto.class, 1);
 //            Encargado encargadoBuscado = em.find(Encargado.class, 1);
-//            Venta ventaBuscada = em.find(Venta.class, 1);
-//            Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
-//            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
-////            encargado.setPersonaidPersona(personaBuscada);
-////            em.persist(encargado);
+////            Venta ventaBuscada = em.find(Venta.class, 1);
+////            Venta venta = new Venta((float) 90.00, date, encargadoBuscado);
+////            RelProductosVentas relProductosVentas = new RelProductosVentas(10, 10, 10,productoBuscado, ventaBuscada);
+//            encargado.setPersonaidPersona(personaBuscada);
+//            em.persist(encargado);
 //
-//             em.persist(venta);
+////             em.persist(venta);
 //            em.getTransaction().commit();
 //            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
 //        } catch (Exception e) {

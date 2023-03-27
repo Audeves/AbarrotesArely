@@ -400,7 +400,10 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 
             Encargado encargadoBuscado = em.find(Encargado.class, 1);
 //            Venta ventaBuscada = em.find(Venta.class, 2);
-            Venta venta = new Venta((float) ventaTotal, fechaActual, encargadoBuscado);
+            float totalDeVenta = ventaTotal;
+            System.out.println("Venta total: " + totalDeVenta);
+            Venta venta = new Venta((float) totalDeVenta, fechaActual, encargadoBuscado);
+            em.persist(venta);
 
             List<RelProductosVentas> relProductoVentasCollection = new ArrayList<>();
 
@@ -419,19 +422,11 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 
             RelProductosVentas relProductosVentas = new RelProductosVentas(cVendida, precio, subTotal, productoBuscado, venta);
 
-            VentaService venSer = new VentaService();
-            venSer.agregarVenta(venta);
+            System.out.println("Cantidad vendida " + cVendida);
 
-            VentasService detalleVenta = new VentasService();
-            detalleVenta.agregarProductoVenta(relProductosVentas);
-//            System.out.println("Cantidad vendida " + cVendida);
-//            detalleVenta.agregarProductoVenta(relProductosVentas);
-//            encargado.setPersonaidPersona(personaBuscada);
-//            em.persist(encargado);
-
-//             em.persist(venta);
-//            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "El REGISTRO se agregó correctamente.", "Información", INFORMATION_MESSAGE);
+            em.persist(relProductosVentas);
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "La venta se agregó correctamente.", "Información", INFORMATION_MESSAGE);
         } catch (Exception e) {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
