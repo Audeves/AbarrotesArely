@@ -73,7 +73,7 @@ public class Pruebas {
 //        });
 //        productoService.actualizarProducto(coca2);
       
-//        Producto producto = new Producto("Pepsi", 30, 10, "2 L");
+//        Producto producto = new Producto("Nito", 17, 10, "92 gr");
 //        productoService.agregarProducto(producto);
 //        productoService.agregarProducto(coca2);
         

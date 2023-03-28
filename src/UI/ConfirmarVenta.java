@@ -14,6 +14,7 @@ import Negocio.VentaService;
 import Negocio.VentasService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -94,7 +95,8 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }
 
     public static Date obtenerFechaActual() {
-        Date fechaActual = new Date();
+        Calendar calendar = Calendar.getInstance(); // Obtiene una instancia de Calendar con la fecha y hora actuales
+        Date fechaActual = calendar.getTime(); // Obtiene la fecha y hora actual en forma de objeto Date
         return fechaActual;
     }
 
@@ -382,13 +384,6 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         productoService.actualizarProducto(productoBD);
 
         float ventaTotal = Float.parseFloat(labelTotal.getText());
-//        JOptionPane.showMessageDialog(null, "VENTA GUARDADA");
-//        RegistroVenta rv2 = new RegistroVenta();
-//        registroVenta.limpiarTabla();
-//        registroVenta.limpiarTablaTicket();
-//        registroVenta.jTotal.setText("$000.00");
-
-//        textoTotal = "$000.00";
         float subTotal = precio * cVendida;
 
         EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
@@ -413,6 +408,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 nombre = listaCarrito.get(i).getNombreProducto();
                 precio = listaCarrito.get(i).getPrecioActual();
                 stock = listaCarrito.get(i).getStock();
+                System.out.println(listaCarrito.size());
                 relProductoVentasCollection.add(new RelProductosVentas(cVendida, precio, subTotal, productoBD, venta));
 
             }

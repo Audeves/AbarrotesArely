@@ -31,23 +31,21 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Desktop
- * actualizacion
+ * @author Desktop actualizacion
  */
 public class RegistroVenta extends javax.swing.JFrame {
 
     ProductoService productoService = new ProductoService();
     int cantidad = 0;
-    public static String txtTotal = "";  
+    public static String txtTotal = "";
     public static DefaultTableModel modelo;
     public static DefaultTableModel modelo2;
     int id, stock;
-    String categoria, nombre; 
-    public static  int cantidadVendida;
+    String categoria, nombre;
+    public static int cantidadVendida;
     float precio;
     public static ArrayList<Producto> listaProductos = new ArrayList<>();
     public static ArrayList<String> listaTicket = new ArrayList<>();
-    
 
     /**
      * Creates new form RegistroVenta
@@ -166,16 +164,7 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nombre", "Precio", "Stock", "Categoría", "Cantidad", "", ""
@@ -426,27 +415,19 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
+
         int row = this.tablaProductos.getSelectedRow();
         try {
-            if (row==-1) {
+            if (row == -1) {
                 System.out.println("no hay una fila");
-            }else{
-//                modelo = (DefaultTableModel) tablaProductos.getModel();
-//                modelo2 = (DefaultTableModel) tablaTicket.getModel();
+            } else {
                 cantidadVendida = Integer.parseInt(tablaTicket.getValueAt(row, 2).toString());
-                System.out.println("cantidad Vendida "+cantidadVendida);
+                System.out.println("cantidad Vendida " + cantidadVendida);
                 id = Integer.parseInt(tablaProductos.getValueAt(row, 0).toString());
                 categoria = tablaProductos.getValueAt(row, 4).toString();
                 nombre = tablaProductos.getValueAt(row, 1).toString();
                 precio = Float.parseFloat(tablaProductos.getValueAt(row, 2).toString());
                 stock = Integer.parseInt(tablaProductos.getValueAt(row, 3).toString());
-//                System.out.println("pasa por aqui");
-//                System.out.println("id "+id);
-//                System.out.println("categoria "+categoria);
-//                System.out.println("nombre "+nombre);
-//                System.out.println("precio "+precio);
-//                System.out.println("stock "+stock);
                 Producto prod = new Producto();
                 prod.setId(id);
                 prod.setCategoria(categoria);
@@ -454,15 +435,11 @@ public class RegistroVenta extends javax.swing.JFrame {
                 prod.setPrecioActual(precio);
                 prod.setStock(stock);
                 listaProductos.add(prod);
-//                ArrayList<Producto> listaProductos2 = new ArrayList<>();
-//                listaProductos.add(prod);
-//                listaProductos = listaProductos2;
+                limpiarTabla();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-        
         limpiarTabla();
         cantidad = 0;
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -487,19 +464,18 @@ public class RegistroVenta extends javax.swing.JFrame {
         btnBorrar.setText("Delete");
 
         int row = tablaProductos.getSelectedRow();
-        DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
-        DefaultTableModel tablaProductos = (DefaultTableModel) this.tablaProductos.getModel();
-        
-        
+        DefaultTableModel modeloTicket = (DefaultTableModel) this.tablaTicket.getModel();
+        DefaultTableModel productosTabla = (DefaultTableModel) this.tablaProductos.getModel();
+
         String name;
         float price, subTotal;
-        
-        name = tablaProductos.getValueAt(row, 1).toString();
-        price = (float) tablaProductos.getValueAt(row, 2);
+
+        name = productosTabla.getValueAt(row, 1).toString();
+        price = (float) productosTabla.getValueAt(row, 2);
         subTotal = price * cantidad;
         Object[] products = {name, price, cantidad, subTotal};
-        modelo.addRow(products);
-        
+        modeloTicket.addRow(products);
+
 //        for (int i = 0; i < productos.length; i++) {
 //            filaSeleccionada[0] = tablaProductos.getValueAt(productos[i], 1);
 //            filaSeleccionada[1] = tablaProductos.getValueAt(productos[i], 2);
@@ -507,7 +483,7 @@ public class RegistroVenta extends javax.swing.JFrame {
 //            filaSeleccionada[3] = Float.parseFloat(tablaProductos.getValueAt(productos[i], 2).toString()) * Float.parseFloat(tablaProductos.getValueAt(productos[i], 5).toString());
 //            modelo.addRow(filaSeleccionada);
 //        }
-        
+    //limpiarTabla();
         cargarTotal();
     }
 
@@ -515,24 +491,24 @@ public class RegistroVenta extends javax.swing.JFrame {
         DefaultTableModel modeloTablaProductos = (DefaultTableModel) tablaProductos.getModel();
         modeloTablaProductos.setRowCount(0);
     }
-    
+
     public void limpiarTablaTicket() {
         DefaultTableModel modeloTablaTicket = (DefaultTableModel) tablaTicket.getModel();
         modeloTablaTicket.setRowCount(0);
     }
 
     private void cargarProductos() {
-        ArrayList<Producto> listaProductos = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
-        DefaultTableModel modelo = (DefaultTableModel) this.tablaProductos.getModel();
-        modelo.setRowCount(0);
-        for (Producto producto : listaProductos) {
+        ArrayList<Producto> productosListaService = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+        DefaultTableModel modeloProducto = (DefaultTableModel) this.tablaProductos.getModel();
+        modeloProducto.setRowCount(0);
+        for (Producto producto : productosListaService) {
             Object[] fila = new Object[5];
             fila[0] = producto.getId();
             fila[1] = producto.getNombreProducto();
             fila[2] = producto.getPrecioActual();
             fila[3] = producto.getStock();
             fila[4] = producto.getCategoria();
-            modelo.addRow(fila);
+            modeloProducto.addRow(fila);
         }
 
     }
@@ -576,29 +552,31 @@ public class RegistroVenta extends javax.swing.JFrame {
                     // Obtener la cantidad actual del producto de la fila seleccionada
                     Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
                     cargarTicket();
-                    
+
                     // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
                     if (cantidadActual == null) {
                         tablaProductos.setValueAt(1, filaSeleccionada, 5);
+                        limpiarTabla();
                     } else {
                         int nuevaCantidad = cantidadActual + 1;
                         tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
+                        limpiarTabla();
                     }
                 }
             }
         });
     }
-    
-    private void cargarTotal(){
-        
+
+    private void cargarTotal() {
+
         float total = 0;
-        
+
         for (int i = 0; i < this.tablaTicket.getRowCount(); i++) {
             total += Float.parseFloat(this.tablaTicket.getValueAt(i, 3).toString());
-            
+
         }
         System.out.println("total: " + total);
-        
+
         String totalView = String.format("%06.2f", total);
         this.jTotal.setText(totalView);
         txtTotal = jTotal.getText();
@@ -677,7 +655,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         int indiceFilaSeleccionada = tablaTicket.getSelectedRow();
         int respuesta = JOptionPane.showOptionDialog(null, "¿Deseas Cancelar la venta en progreso?", "Confirmación",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "No");
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "No");
         DefaultTableModel modelo = (DefaultTableModel) this.tablaTicket.getModel();
 
         if (respuesta == JOptionPane.YES_OPTION) {
