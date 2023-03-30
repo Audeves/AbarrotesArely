@@ -4,6 +4,7 @@
  */
 package UI;
 
+import DTO.ProductoDTO;
 import Entidades.Encargado;
 import Entidades.Persona;
 import Entidades.Producto;
@@ -34,23 +35,26 @@ import javax.swing.table.TableModel;
 public class ConfirmarVenta extends javax.swing.JFrame {
 
     private RegistroVenta registroVenta;
-
+    List<ProductoDTO> listaProductos = new ArrayList<>();
     ArrayList<Producto> listaCarrito = new ArrayList<>();
-    ArrayList<String> listaTicket2 = new ArrayList<>();
+    ArrayList<Object> listaTicket2 = new ArrayList<>();
     int id, stock, cVendida;
     String categoria, nombre;
     float precio;
     String total;
+    float importe = 0, cambio = 0, totalFloat = 0;
 
     /**
      * Creates new form ConfirmarVenta
      */
-    public ConfirmarVenta() {
+    public ConfirmarVenta(List<ProductoDTO> lstProductos) {
         initComponents();
         setLocationRelativeTo(null);
-        this.listaCarrito = registroVenta.listaProductos;
+        this.listaProductos = lstProductos;
+//        this.listaCarrito = registroVenta.listaProductos;
         this.listaTicket2 = registroVenta.listaTicket;
-        cVendida = registroVenta.cantidadVendida;
+        cVendida = registroVenta.nuevaCantidad;
+        System.out.println(cVendida);
 //        RegistroVenta rV = new RegistroVenta();
         this.labelTotal.setText(registroVenta.txtTotal);
         Persistencia();
@@ -69,29 +73,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 //            cVendida = listaTicket2.get(i);
             System.out.println(listaTicket2.size());
         }
-//        Producto producto = new Producto(id, nombre, precio, stock , categoria);
 
-//        ProductoService productoService = new ProductoService();
-//        String nombreProducto = nombre; // nombre de producto a buscar
-//        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
-//        productos.stream().map((producto) -> {
-//            System.out.println("ID: " + producto.getId());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Nombre: " + producto.getNombreProducto());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Precio: " + producto.getPrecioActual());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Stock: " + producto.getStock());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Categoría: " + producto.getCategoria());
-//            return producto;
-//        }).forEachOrdered((_item) -> {
-//            System.out.println("----------------------");
-//        });
     }
 
     public static Date obtenerFechaActual() {
@@ -101,23 +83,35 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }
 
     private void calcularCambio() {
-        String importe;
-        total = this.labelTotal.getText();
+        String total = this.labelTotal.getText();
 
-        float Importe = 0, cambio = 0, Total = 0;
-        Total = Float.parseFloat(total);
+        try {
+            totalFloat = Float.parseFloat(total.replace(",", ".")); // Reemplazamos la coma por un punto y luego convertimos a float
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El total no es un número válido");
+            return;
+        }
+
         do {
-            importe = JOptionPane.showInputDialog("INGRESA EL IMPORTE $ ");
-            Importe = Float.parseFloat(importe);
-            if (Total > Importe) {
-                JOptionPane.showMessageDialog(null, "El importe debe de ser mayor al total");
+            String importeStr = JOptionPane.showInputDialog("INGRESA EL IMPORTE $ ");
+            try {
+                importe = Float.parseFloat(importeStr.replace(",", ".")); // Reemplazamos la coma por un punto y luego convertimos a float
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El importe no es un número válido");
+                continue;
             }
-        } while (Total > Importe);
-        importe = String.format("%06.2f", Importe);
-        this.labelPago.setText(String.valueOf(importe));
-        cambio = Importe - Total;
-        String vuelto = String.format("%06.2f", cambio);
-        this.labelCambio.setText(String.valueOf(vuelto));
+
+            if (totalFloat > importe) {
+                JOptionPane.showMessageDialog(null, "El importe debe ser mayor o igual al total");
+            }
+        } while (totalFloat > importe);
+
+        String importeFormatted = String.format("%06.2f", importe).replace(".", ","); // Formateamos el importe con dos decimales y reemplazamos el punto por una coma
+        this.labelPago.setText(importeFormatted);
+
+        cambio = importe - totalFloat;
+        String cambioFormatted = String.format("%06.2f", cambio).replace(".", ","); // Formateamos el cambio con dos decimales y reemplazamos el punto por una coma
+        this.labelCambio.setText(cambioFormatted);
     }
 
     /**
@@ -378,49 +372,43 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         System.out.println("Cantidad vendida " + cVendida);
         ProductoService productoService = new ProductoService();
 //        int canVendida = Integer.parseInt(cVendida);
-        Producto productoBD = productoService.buscarProductoPorId(id);
-        int stocA = productoBD.getStock() - 1;
-        productoBD.setStock(stocA);
-        productoService.actualizarProducto(productoBD);
-
-        float ventaTotal = Float.parseFloat(labelTotal.getText());
-        float subTotal = precio * cVendida;
+        int cantidadVendida = cVendida;
+        float PrecioVender = precio;
+        float subTotal = PrecioVender * cantidadVendida;
 
         EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("AbarrotesArelyPU");
         EntityManager em = managerFactory.createEntityManager();
         try {
             em.getTransaction().begin();
-            Persona personaBuscada = em.find(Persona.class, 1);
-            Producto productoBuscado = em.find(Producto.class, productoBD.getId());
 
-            Encargado encargadoBuscado = em.find(Encargado.class, 1);
+            //Persona personaBuscada = em.find(Persona.class, 1);
+            //Producto productoBuscado = em.find(Producto.class, productoBD.getId());
+            Encargado encargadoBuscadoFijo = em.find(Encargado.class, 1);
 //            Venta ventaBuscada = em.find(Venta.class, 2);
-            float totalDeVenta = ventaTotal;
+            float totalDeVenta = totalFloat;
             System.out.println("Venta total: " + totalDeVenta);
-            Venta venta = new Venta((float) totalDeVenta, fechaActual, encargadoBuscado);
+            Venta venta = new Venta(totalDeVenta, fechaActual, encargadoBuscadoFijo);
             em.persist(venta);
 
             List<RelProductosVentas> relProductoVentasCollection = new ArrayList<>();
 
-            for (int i = 0; i < listaCarrito.size(); i++) {
-                id = listaCarrito.get(i).getId();
-                categoria = listaCarrito.get(i).getCategoria();
-                nombre = listaCarrito.get(i).getNombreProducto();
-                precio = listaCarrito.get(i).getPrecioActual();
-                stock = listaCarrito.get(i).getStock();
-                System.out.println(listaCarrito.size());
-                relProductoVentasCollection.add(new RelProductosVentas(cVendida, precio, subTotal, productoBD, venta));
+            for (int i = 0; i < listaProductos.size(); i++) {
 
+                Producto productoBD = em.find(Producto.class, listaProductos.get(i).getIdProducto());
+                //Cantidad vendida del ticket
+                int stocA = productoBD.getStock() - listaProductos.get(i).getCantidad();
+                productoBD.setStock(stocA);
+                em.merge(productoBD);
+                //id = listaCarrito.get(i).getId();
+                System.out.println(listaProductos.size());
+                relProductoVentasCollection.add(new RelProductosVentas(listaProductos.get(i).getCantidad(), listaProductos.get(i).getPrecioVenta(), listaProductos.get(i).getSubtotal(), productoBD, venta));
+                productoBD.setRelProductosVentasCollection(relProductoVentasCollection);
+                venta.setRelProductosVentasCollection(relProductoVentasCollection);
+                System.out.println("Cantidad vendida " + listaProductos.get(i).getCantidad());
             }
 
-            productoBD.setRelProductosVentasCollection(relProductoVentasCollection);
-            venta.setRelProductosVentasCollection(relProductoVentasCollection);
-
-            RelProductosVentas relProductosVentas = new RelProductosVentas(cVendida, precio, subTotal, productoBuscado, venta);
-
-            System.out.println("Cantidad vendida " + cVendida);
-
-            em.persist(relProductosVentas);
+//            RelProductosVentas relProductosVentas = new RelProductosVentas(cantidadVendida, PrecioVender, subTotal, productoBuscado, venta);
+            //em.persist(relProductosVentas);
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "La venta se agregó correctamente.", "Información", INFORMATION_MESSAGE);
         } catch (Exception e) {
@@ -431,6 +419,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
         }
 
         this.dispose();
+
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 

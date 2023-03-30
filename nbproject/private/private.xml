@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/main/Pruebas.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/UI/RegistroVenta.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/UI/ConfirmarVenta.java</file>
+            <file>file:/C:/Users/Desktop/Documents/AbarrotesArely-pruebasPersistencia/AbarrotesArely-pruebasPersistencia/src/UI/ConfirmarVenta.java</file>
+            <file>file:/C:/Users/Desktop/Documents/AbarrotesArely-pruebasPersistencia/AbarrotesArely-pruebasPersistencia/src/DAOs/ProductoDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/AbarrotesArely-pruebasPersistencia/AbarrotesArely-pruebasPersistencia/src/Negocio/ProductoService.java</file>
+            <file>file:/C:/Users/Desktop/Documents/AbarrotesArely-pruebasPersistencia/AbarrotesArely-pruebasPersistencia/src/UI/RegistroVenta.java</file>
         </group>
     </open-files>
 </project-private>

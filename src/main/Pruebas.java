@@ -47,60 +47,14 @@ public class Pruebas {
         rV.show();
 //        Date date = new GregorianCalendar(Calendar.YEAR, Calendar.MARCH, Calendar.DAY_OF_MONTH).getTime();
 //        ProductoService productoService = new ProductoService();
-//
-//        //Aqui insertamos el producto
-//        Producto coca2 = new Producto("Coca Cola", 17, 10, "600 ml");
-////        productoService.buscarPorNombre("Coca Cola");
-//        String nombreProducto = "Coca Cola"; // nombre de producto a buscar
-//        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
-//        productos.stream().map((producto) -> {
-//            System.out.println("ID: " + producto.getId());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Nombre: " + producto.getNombreProducto());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Precio: " + producto.getPrecioActual());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Stock: " + producto.getStock());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Categoría: " + producto.getCategoria());
-//            return producto;
-//        }).forEachOrdered((_item) -> {
-//            System.out.println("----------------------");
-//        });
-//        productoService.actualizarProducto(coca2);
-      
+//      
 //        Producto producto = new Producto("Nito", 17, 10, "92 gr");
 //        productoService.agregarProducto(producto);
-//        productoService.agregarProducto(coca2);
-        
-//        String nombreProducto = "Coca-Cola"; // nombre de producto a buscar
-//        ArrayList<Producto> productos = (ArrayList<Producto>) productoService.buscarPorNombre(nombreProducto);
-//        productos.stream().map((producto) -> {
-//            System.out.println("ID: " + producto.getId());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Nombre: " + producto.getNombreProducto());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Precio: " + producto.getPrecioActual());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Stock: " + producto.getStock());
-//            return producto;
-//        }).map((producto) -> {
-//            System.out.println("Categoría: " + producto.getCategoria());
-//            return producto;
-//        }).forEachOrdered((_item) -> {
-//            System.out.println("----------------------");
-//        }); 
+//        
 //        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>();
 ////        //Aqui creamos la persona
 //        Persona persona = new Persona("Jose Hernandez", "Obregon", "CIUOUEBF783R", "Calle 200", "Sochiloa", "545345334");
-////        PersonaService personaService = new PersonaService();
+//        PersonaService personaService = new PersonaService();
 ////        personaService.agregarPersona(persona);
 //        Encargado encargado = new Encargado("JFKDND", persona);
 //        listaEncargados.add(encargado);

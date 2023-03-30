@@ -5,6 +5,7 @@
  */
 package UI;
 
+import DTO.ProductoDTO;
 import Entidades.Producto;
 import Negocio.ProductoService;
 import java.awt.Component;
@@ -35,6 +36,7 @@ import javax.swing.table.TableModel;
  */
 public class RegistroVenta extends javax.swing.JFrame {
 
+    List<ProductoDTO> listaProductoDTOs = new ArrayList<>();
     ProductoService productoService = new ProductoService();
     int cantidad = 0;
     public static String txtTotal = "";
@@ -45,7 +47,10 @@ public class RegistroVenta extends javax.swing.JFrame {
     public static int cantidadVendida;
     float precio;
     public static ArrayList<Producto> listaProductos = new ArrayList<>();
-    public static ArrayList<String> listaTicket = new ArrayList<>();
+    public static ArrayList<Object> listaTicket = new ArrayList<>();
+    Integer cantidadActual;
+    public static int nuevaCantidad;
+    float subTotal;
 
     /**
      * Creates new form RegistroVenta
@@ -421,7 +426,8 @@ public class RegistroVenta extends javax.swing.JFrame {
             if (row == -1) {
                 System.out.println("no hay una fila");
             } else {
-                cantidadVendida = Integer.parseInt(tablaTicket.getValueAt(row, 2).toString());
+                System.out.println(cantidad);
+                cantidadVendida = cantidad;
                 System.out.println("cantidad Vendida " + cantidadVendida);
                 id = Integer.parseInt(tablaProductos.getValueAt(row, 0).toString());
                 categoria = tablaProductos.getValueAt(row, 4).toString();
@@ -445,7 +451,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        ConfirmarVenta cv = new ConfirmarVenta();
+        ConfirmarVenta cv = new ConfirmarVenta(this.listaProductoDTOs);
         cv.setVisible(true);
         jTotal.setText("000.00");
         limpiarTablaTicket();
@@ -469,21 +475,14 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         String name;
         float price, subTotal;
-
         name = productosTabla.getValueAt(row, 1).toString();
         price = (float) productosTabla.getValueAt(row, 2);
         subTotal = price * cantidad;
         Object[] products = {name, price, cantidad, subTotal};
         modeloTicket.addRow(products);
+        listaTicket.add(products);
 
-//        for (int i = 0; i < productos.length; i++) {
-//            filaSeleccionada[0] = tablaProductos.getValueAt(productos[i], 1);
-//            filaSeleccionada[1] = tablaProductos.getValueAt(productos[i], 2);
-//            filaSeleccionada[2] = tablaProductos.getValueAt(productos[i], 5);
-//            filaSeleccionada[3] = Float.parseFloat(tablaProductos.getValueAt(productos[i], 2).toString()) * Float.parseFloat(tablaProductos.getValueAt(productos[i], 5).toString());
-//            modelo.addRow(filaSeleccionada);
-//        }
-    //limpiarTabla();
+        //limpiarTabla();
         cargarTotal();
     }
 
@@ -537,7 +536,7 @@ public class RegistroVenta extends javax.swing.JFrame {
             fila[2] = producto.getPrecioActual();
             fila[3] = producto.getStock();
             fila[4] = producto.getCategoria();
-            fila[5] = "0"; //Este es el campo de cantidad
+            fila[5] = cantidad; //Este es el campo de cantidad
             fila[6] = btnAumentar;
             fila[7] = btnDisminuir;
             xmodelo.addRow(fila);
@@ -550,23 +549,47 @@ public class RegistroVenta extends javax.swing.JFrame {
 
                 if (filaSeleccionada >= 0) {
                     // Obtener la cantidad actual del producto de la fila seleccionada
-                    Integer cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
+                    cantidadActual = (Integer) tablaProductos.getValueAt(filaSeleccionada, 5);
                     cargarTicket();
 
+                    Integer idObtenido = Integer.parseInt(tablaProductos.getValueAt(filaSeleccionada, 0).toString());
+                    String categoriaObtenidoa = tablaProductos.getValueAt(filaSeleccionada, 4).toString();
+                    String nombreObtenido = tablaProductos.getValueAt(filaSeleccionada, 1).toString();
+                    float precioObtenido = Float.parseFloat(tablaProductos.getValueAt(filaSeleccionada, 2).toString());
+                    int stockOptenido = Integer.parseInt(tablaProductos.getValueAt(filaSeleccionada, 3).toString());
+                    Producto prod = new Producto();
+                    prod.setId(idObtenido);
+                    prod.setCategoria(categoriaObtenidoa);
+                    prod.setNombreProducto(nombreObtenido);
+                    prod.setPrecioActual(precioObtenido);
+                    prod.setStock(stockOptenido);
+
+                    listaProductos.add(prod);
+                    
                     // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
                     if (cantidadActual == null) {
                         tablaProductos.setValueAt(1, filaSeleccionada, 5);
                         limpiarTabla();
                     } else {
-                        int nuevaCantidad = cantidadActual + 1;
+                        nuevaCantidad = cantidadActual;
                         tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
+                        subTotal = nuevaCantidad * precioObtenido;
+                        ProductoDTO datosProductoDTO = new ProductoDTO(idObtenido, precioObtenido, nuevaCantidad, calcularSubtotal(nuevaCantidad, precioObtenido));
+                        listaProductoDTOs.add(datosProductoDTO);
+                        System.out.println("Id del producto: "+ datosProductoDTO.getIdProducto());
+                        System.out.println("Precio del producto"+datosProductoDTO.getPrecioVenta());
+                        System.out.println("Cantidad de producto: "+ datosProductoDTO.getCantidad());
+                        System.out.println("Subtotal: "+ calcularSubtotal(nuevaCantidad, precioObtenido));
                         limpiarTabla();
                     }
+
                 }
             }
         });
     }
-
+    public float calcularSubtotal(int cantidadVender, float precioVender){
+        return cantidadVender * precioVender;
+    }
     private void cargarTotal() {
 
         float total = 0;
