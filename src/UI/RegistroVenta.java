@@ -478,9 +478,27 @@ public class RegistroVenta extends javax.swing.JFrame {
         name = productosTabla.getValueAt(row, 1).toString();
         price = (float) productosTabla.getValueAt(row, 2);
         subTotal = price * cantidad;
-        Object[] products = {name, price, cantidad, subTotal};
-        modeloTicket.addRow(products);
-        listaTicket.add(products);
+
+        // Verificar si el producto ya existe en la tabla
+        boolean found = false;
+        int rowCount = modeloTicket.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String productName = modeloTicket.getValueAt(i, 0).toString();
+            if (productName.equals(name)) {
+                int quantity = (int) modeloTicket.getValueAt(i, 2) + cantidad;
+                float newSubTotal = quantity * price;
+                modeloTicket.setValueAt(quantity, i, 2);
+                modeloTicket.setValueAt(newSubTotal, i, 3);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            Object[] products = {name, price, cantidad, subTotal};
+            modeloTicket.addRow(products);
+            listaTicket.add(products);
+        }
 
         //limpiarTabla();
         cargarTotal();
@@ -564,8 +582,31 @@ public class RegistroVenta extends javax.swing.JFrame {
                     prod.setPrecioActual(precioObtenido);
                     prod.setStock(stockOptenido);
 
-                    listaProductos.add(prod);
-                    
+                    // Buscar el producto en la lista
+                    boolean encontrado = false;
+                    for (ProductoDTO prodDTO : listaProductoDTOs) {
+                        if (prodDTO.getIdProducto() == idObtenido) {
+                            prodDTO.setCantidad(prodDTO.getCantidad() + cantidadActual);
+                            prodDTO.setSubtotal(calcularSubtotal(prodDTO.getCantidad(), prodDTO.getPrecioVenta()));
+                            encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (!encontrado) {
+                        // Si el producto no se encontró en la lista, agregar uno nuevo
+                        Producto prodNuevo = new Producto();
+                        prodNuevo.setId(idObtenido);
+                        prodNuevo.setCategoria(categoriaObtenidoa);
+                        prodNuevo.setNombreProducto(nombreObtenido);
+                        prodNuevo.setPrecioActual(precioObtenido);
+                        prodNuevo.setStock(stockOptenido);
+                        listaProductos.add(prodNuevo);
+
+                        ProductoDTO datosProductoDTO = new ProductoDTO(idObtenido, precioObtenido, cantidadActual, calcularSubtotal(cantidadActual, precioObtenido));
+                        listaProductoDTOs.add(datosProductoDTO);
+                    }
+
                     // Si la cantidad actual es nula, establecerla en 1. Si no, incrementarla en 1
                     if (cantidadActual == null) {
                         tablaProductos.setValueAt(1, filaSeleccionada, 5);
@@ -574,12 +615,10 @@ public class RegistroVenta extends javax.swing.JFrame {
                         nuevaCantidad = cantidadActual;
                         tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
                         subTotal = nuevaCantidad * precioObtenido;
-                        ProductoDTO datosProductoDTO = new ProductoDTO(idObtenido, precioObtenido, nuevaCantidad, calcularSubtotal(nuevaCantidad, precioObtenido));
-                        listaProductoDTOs.add(datosProductoDTO);
-                        System.out.println("Id del producto: "+ datosProductoDTO.getIdProducto());
-                        System.out.println("Precio del producto"+datosProductoDTO.getPrecioVenta());
-                        System.out.println("Cantidad de producto: "+ datosProductoDTO.getCantidad());
-                        System.out.println("Subtotal: "+ calcularSubtotal(nuevaCantidad, precioObtenido));
+                        System.out.println("Id del producto: " + idObtenido);
+                        System.out.println("Precio del producto" + precioObtenido);
+                        System.out.println("Cantidad de producto: " + nuevaCantidad);
+                        System.out.println("Subtotal: " + calcularSubtotal(nuevaCantidad, precioObtenido));
                         limpiarTabla();
                     }
 
@@ -587,9 +626,11 @@ public class RegistroVenta extends javax.swing.JFrame {
             }
         });
     }
-    public float calcularSubtotal(int cantidadVender, float precioVender){
+
+    public float calcularSubtotal(int cantidadVender, float precioVender) {
         return cantidadVender * precioVender;
     }
+
     private void cargarTotal() {
 
         float total = 0;

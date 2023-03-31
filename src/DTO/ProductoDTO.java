@@ -12,6 +12,7 @@ package DTO;
 public class ProductoDTO {
 
     private int idProducto;
+    private String nombreProduto;
     private int cantidad;
     private float subtotal;
     private float precioVenta;
@@ -26,6 +27,22 @@ public class ProductoDTO {
         this.subtotal = subtotal;
     }
 
+    public ProductoDTO(int idProducto, String nombreProduto, int cantidad, float subtotal, float precioVenta) {
+        this.idProducto = idProducto;
+        this.nombreProduto = nombreProduto;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.precioVenta = precioVenta;
+    }
+
+    public String getNombreProduto() {
+        return nombreProduto;
+    }
+
+    public void setNombreProduto(String nombreProduto) {
+        this.nombreProduto = nombreProduto;
+    }
+    
     public int getIdProducto() {
         return idProducto;
     }

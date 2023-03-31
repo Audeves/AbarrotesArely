@@ -401,9 +401,13 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 em.merge(productoBD);
                 //id = listaCarrito.get(i).getId();
                 System.out.println(listaProductos.size());
+               
                 relProductoVentasCollection.add(new RelProductosVentas(listaProductos.get(i).getCantidad(), listaProductos.get(i).getPrecioVenta(), listaProductos.get(i).getSubtotal(), productoBD, venta));
                 productoBD.setRelProductosVentasCollection(relProductoVentasCollection);
                 venta.setRelProductosVentasCollection(relProductoVentasCollection);
+                
+//                RelProductosVentas relProductosVentasBuscada = em.find(RelProductosVentas.class, listaProductos.get(i).getIdProducto());
+                System.out.println("ID del producto: "+ listaProductos.get(i).getIdProducto());
                 System.out.println("Cantidad vendida " + listaProductos.get(i).getCantidad());
             }
 
