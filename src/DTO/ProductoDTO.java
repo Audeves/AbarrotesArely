@@ -27,12 +27,12 @@ public class ProductoDTO {
         this.subtotal = subtotal;
     }
 
-    public ProductoDTO(int idProducto, String nombreProduto, int cantidad, float subtotal, float precioVenta) {
+    public ProductoDTO(int idProducto, String nombreProduto, float precioVenta,int cantidad, float subtotal) {
         this.idProducto = idProducto;
         this.nombreProduto = nombreProduto;
+        this.precioVenta = precioVenta;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
-        this.precioVenta = precioVenta;
     }
 
     public String getNombreProduto() {

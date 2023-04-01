@@ -603,7 +603,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                         prodNuevo.setStock(stockOptenido);
                         listaProductos.add(prodNuevo);
 
-                        ProductoDTO datosProductoDTO = new ProductoDTO(idObtenido, precioObtenido, cantidadActual, calcularSubtotal(cantidadActual, precioObtenido));
+                        ProductoDTO datosProductoDTO = new ProductoDTO(idObtenido, nombreObtenido, precioObtenido, cantidadActual, calcularSubtotal(cantidadActual, precioObtenido));
                         listaProductoDTOs.add(datosProductoDTO);
                     }
 
@@ -616,6 +616,7 @@ public class RegistroVenta extends javax.swing.JFrame {
                         tablaProductos.setValueAt(nuevaCantidad, filaSeleccionada, 5);
                         subTotal = nuevaCantidad * precioObtenido;
                         System.out.println("Id del producto: " + idObtenido);
+                        System.out.println("Nombre del producto: " + nombreObtenido);
                         System.out.println("Precio del producto" + precioObtenido);
                         System.out.println("Cantidad de producto: " + nuevaCantidad);
                         System.out.println("Subtotal: " + calcularSubtotal(nuevaCantidad, precioObtenido));
@@ -706,13 +707,19 @@ public class RegistroVenta extends javax.swing.JFrame {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             if (indiceFilaSeleccionada != -1) {
+                // Obtener el producto correspondiente a la fila seleccionada
+                ProductoDTO productoSeleccionado = listaProductoDTOs.get(indiceFilaSeleccionada);
+
+                // Eliminar el producto de la lista
+                listaProductoDTOs.remove(productoSeleccionado);
+
+                // Actualizar la tabla y el total
                 modelo.removeRow(indiceFilaSeleccionada);
                 cargarTotal();
             }
         } else {
             ((Window) SwingUtilities.getRoot((Component) evt.getSource())).dispose();
         }
-        // Eliminar la fila seleccionada
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
