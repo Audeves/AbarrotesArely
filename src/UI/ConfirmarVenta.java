@@ -35,7 +35,7 @@ import javax.swing.table.TableModel;
 public class ConfirmarVenta extends javax.swing.JFrame {
 
     private RegistroVenta registroVenta;
-    List<ProductoDTO> listaProductos = new ArrayList<>();
+    List<ProductoDTO> listaProductosDTO = new ArrayList<>();
     ArrayList<Producto> listaCarrito = new ArrayList<>();
     ArrayList<Object> listaTicket2 = new ArrayList<>();
     int id, stock, cVendida;
@@ -50,8 +50,8 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     public ConfirmarVenta(List<ProductoDTO> lstProductos) {
         initComponents();
         setLocationRelativeTo(null);
-        this.listaProductos = lstProductos;
-//        this.listaCarrito = registroVenta.listaProductos;
+        this.listaProductosDTO = lstProductos;
+        this.listaCarrito = registroVenta.listaProductos;
         this.listaTicket2 = registroVenta.listaTicket;
         cVendida = registroVenta.nuevaCantidad;
         System.out.println(cVendida);
@@ -392,23 +392,27 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 
             List<RelProductosVentas> relProductoVentasCollection = new ArrayList<>();
 
-            for (int i = 0; i < listaProductos.size(); i++) {
+            for (int i = 0; i < listaProductosDTO.size(); i++) {
 
-                Producto productoBD = em.find(Producto.class, listaProductos.get(i).getIdProducto());
+                Producto productoBD = em.find(Producto.class, listaProductosDTO.get(i).getIdProducto());
                 //Cantidad vendida del ticket
-                int stocA = productoBD.getStock() - listaProductos.get(i).getCantidad();
+                int stocA = productoBD.getStock() - listaProductosDTO.get(i).getCantidad();
                 productoBD.setStock(stocA);
                 em.merge(productoBD);
+                for (int j = 0; j < listaCarrito.size(); j++) {
+                    listaCarrito.get(j).setStock(stocA);
+                    
+                }
                 //id = listaCarrito.get(i).getId();
-                System.out.println(listaProductos.size());
+                System.out.println(listaProductosDTO.size());
                
-                relProductoVentasCollection.add(new RelProductosVentas(listaProductos.get(i).getCantidad(), listaProductos.get(i).getPrecioVenta(), listaProductos.get(i).getSubtotal(), productoBD, venta));
+                relProductoVentasCollection.add(new RelProductosVentas(listaProductosDTO.get(i).getCantidad(), listaProductosDTO.get(i).getPrecioVenta(), listaProductosDTO.get(i).getSubtotal(), productoBD, venta));
                 productoBD.setRelProductosVentasCollection(relProductoVentasCollection);
                 venta.setRelProductosVentasCollection(relProductoVentasCollection);
                 
-//                RelProductosVentas relProductosVentasBuscada = em.find(RelProductosVentas.class, listaProductos.get(i).getIdProducto());
-                System.out.println("ID del producto: "+ listaProductos.get(i).getIdProducto());
-                System.out.println("Cantidad vendida " + listaProductos.get(i).getCantidad());
+//                RelProductosVentas relProductosVentasBuscada = em.find(RelProductosVentas.class, listaProductosDTO.get(i).getIdProducto());
+                System.out.println("ID del producto: "+ listaProductosDTO.get(i).getIdProducto());
+                System.out.println("Cantidad vendida " + listaProductosDTO.get(i).getCantidad());
             }
 
 //            RelProductosVentas relProductosVentas = new RelProductosVentas(cantidadVendida, PrecioVender, subTotal, productoBuscado, venta);

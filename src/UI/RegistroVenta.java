@@ -544,20 +544,34 @@ public class RegistroVenta extends javax.swing.JFrame {
         String nombre = this.txtBuscar.getText();
         ArrayList<Producto> productos = new ArrayList<>();
         DefaultTableModel xmodelo = (DefaultTableModel) this.tablaProductos.getModel();
-        productos = (ArrayList<Producto>) this.productoService.buscarPorNombre(nombre);
-        listaProductos = productos;
+
+        boolean productoEncontrado = false; // Variable para validar si ya se ha buscado el producto con ese nombre antes
+
+        if (!listaProductos.isEmpty() && listaProductos.get(0).getNombreProducto().equals(nombre)) {
+            productoEncontrado = true;
+            productos = listaProductos; // Utilizar la lista de productos anterior si se ha buscado el mismo nombre antes
+        } else {
+            productos = (ArrayList<Producto>) this.productoService.buscarPorNombre(nombre);
+            listaProductos = productos;
+        }
+
         xmodelo.setRowCount(0);
-        for (Producto producto : productos) {
-            Object[] fila = new Object[8];
-            fila[0] = producto.getId();
-            fila[1] = producto.getNombreProducto();
-            fila[2] = producto.getPrecioActual();
-            fila[3] = producto.getStock();
-            fila[4] = producto.getCategoria();
-            fila[5] = cantidad; //Este es el campo de cantidad
-            fila[6] = btnAumentar;
-            fila[7] = btnDisminuir;
-            xmodelo.addRow(fila);
+        if (!productos.isEmpty()) {
+            for (Producto producto : listaProductos) {
+                Object[] fila = new Object[8];
+                fila[0] = producto.getId();
+                fila[1] = producto.getNombreProducto();
+                fila[2] = producto.getPrecioActual();
+                fila[3] = producto.getStock();
+                fila[4] = producto.getCategoria();
+                fila[5] = cantidad; //Este es el campo de cantidad
+                fila[6] = btnAumentar;
+                fila[7] = btnDisminuir;
+                xmodelo.addRow(fila);
+            }
+        } else if (!productoEncontrado) {
+            // Mostrar mensaje de error o hacer algo más si no se encontró ningún producto con ese nombre
+            JOptionPane.showMessageDialog(this, "No se encontró ningún producto con ese nombre.");
         }
         btnAgregar.addActionListener(new ActionListener() {
             @Override
