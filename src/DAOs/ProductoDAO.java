@@ -71,14 +71,14 @@ public class ProductoDAO extends BaseDAO<Producto> {
         EntityManager em = this.getEntityManager();
         try {
             if (producto != null) {
-            em.getTransaction().begin();
-            em.merge(producto);
-            em.getTransaction().commit();
+                em.getTransaction().begin();
+                em.merge(producto);
+                em.getTransaction().commit();
             }
         } catch (Exception e) {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Error al actualizar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        }finally{
+        } finally {
             em.close();
         }
 
@@ -111,17 +111,15 @@ public class ProductoDAO extends BaseDAO<Producto> {
 
     public ArrayList<Producto> buscarPorNombre(String nombre) {
         EntityManager em = this.getEntityManager();
-        em.getTransaction().begin();
-        List<Producto> productos;
+        TypedQuery<Producto> query;
         if (!nombre.equals("")) {
-            String jpql = String.format("SELECT * FROM sistemapuntoventa.producto WHERE sistemapuntoventa.producto.nombreProducto LIKE '%%" + nombre + "%%'");
-            productos = em.createNativeQuery(jpql, Producto.class).getResultList();
+            query = em.createQuery("SELECT p FROM Producto p WHERE p.nombreProducto LIKE CONCAT('%', :nombre, '%')", Producto.class);
+            query.setParameter("nombre", nombre);
         } else {
-            String jpql = "SELECT * FROM sistemapuntoventa.producto;";
-            productos = em.createNativeQuery(jpql, Producto.class).getResultList();
+            query = em.createQuery("SELECT p FROM Producto p", Producto.class);
         }
-        em.getTransaction().commit();
-
+        List<Producto> productos = query.getResultList();
+        productos.forEach(em::refresh); // Forzar la actualización desde la base de datos
         return new ArrayList<>(productos);
     }
 
