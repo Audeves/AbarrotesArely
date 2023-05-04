@@ -418,20 +418,21 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 //                RelProductosVentas relProductosVentasBuscada = em.find(RelProductosVentas.class, listaProductosDTO.get(i).getIdProducto());
                 System.out.println("ID del producto: "+ listaProductosDTO.get(i).getIdProducto());
                 System.out.println("Cantidad vendida " + listaProductosDTO.get(i).getCantidad());
-                listaProductosDTO.clear();
+                
             }
-
+            listaProductosDTO.clear();
 //            RelProductosVentas relProductosVentas = new RelProductosVentas(cantidadVendida, PrecioVender, subTotal, productoBuscado, venta);
             //em.persist(relProductosVentas);
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "La venta se agregó correctamente.", "Información", INFORMATION_MESSAGE);
         } catch (Exception e) {
             em.getTransaction().rollback();
+            
             JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
         } finally {
             em.close();
         }
-
+        
         this.dispose();
 
 
