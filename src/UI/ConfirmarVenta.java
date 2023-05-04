@@ -399,10 +399,15 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 int stocA = productoBD.getStock() - listaProductosDTO.get(i).getCantidad();
                 productoBD.setStock(stocA);
                 em.merge(productoBD);
-                for (int j = 0; j < listaCarrito.size(); j++) {
-                    listaCarrito.get(j).setStock(stocA);
-                    
-                }
+                listaCarrito.get(i).setStock(productoBD.getStock());
+                
+                System.out.println("Producto: "+listaCarrito.get(i).getNombreProducto() + " Stock: "+ listaCarrito.get(i).getStock());
+//                for (int j = 0; j < listaCarrito.size(); j++) {
+//                    listaCarrito.get(j).setStock(productoBD.getStock());
+//                    
+//                    System.out.println("Producto: "+listaCarrito.get(i).getNombreProducto() + "Stock: "+ listaCarrito.get(i).getStock());
+//                    
+//                }
                 //id = listaCarrito.get(i).getId();
                 System.out.println(listaProductosDTO.size());
                
@@ -413,6 +418,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 //                RelProductosVentas relProductosVentasBuscada = em.find(RelProductosVentas.class, listaProductosDTO.get(i).getIdProducto());
                 System.out.println("ID del producto: "+ listaProductosDTO.get(i).getIdProducto());
                 System.out.println("Cantidad vendida " + listaProductosDTO.get(i).getCantidad());
+                listaProductosDTO.clear();
             }
 
 //            RelProductosVentas relProductosVentas = new RelProductosVentas(cantidadVendida, PrecioVender, subTotal, productoBuscado, venta);
