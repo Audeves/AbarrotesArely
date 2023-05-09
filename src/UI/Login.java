@@ -17,6 +17,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -225,9 +226,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login login = new Login();
-                login.setLocationRelativeTo(null);
-                login.setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
