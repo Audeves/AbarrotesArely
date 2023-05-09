@@ -116,6 +116,11 @@ public class Login extends javax.swing.JFrame {
         btnIniciarSesion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
         btnIniciarSesion.setRequestFocusEnabled(false);
         btnIniciarSesion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
+        btnIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIniciarSesionMouseClicked(evt);
+            }
+        });
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSesionActionPerformed(evt);
@@ -195,6 +200,10 @@ public class Login extends javax.swing.JFrame {
     private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtContraActionPerformed
+
+    private void btnIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseClicked
+
+    }//GEN-LAST:event_btnIniciarSesionMouseClicked
 
     /**
      * @param args the command line arguments
