@@ -16,6 +16,7 @@ import Negocio.PersonaService;
 import Negocio.ProductoService;
 import Negocio.VentaService;
 import Negocio.VentasService;
+import UI.RegistroProducto;
 import UI.RegistroVenta;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -43,8 +44,10 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        RegistroVenta rV = new RegistroVenta();
-        rV.show();
+//        RegistroVenta rV = new RegistroVenta();
+//        rV.show();
+          RegistroProducto rP = new RegistroProducto();
+          rP.show();
 //        Date date = new GregorianCalendar(Calendar.YEAR, Calendar.MARCH, Calendar.DAY_OF_MONTH).getTime();
 //        ProductoService productoService = new ProductoService();
 //      

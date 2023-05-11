@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/UI/Render.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/DTO/ProductoDTO.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/Entidades/Producto.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/DAOs/ProductoDAO.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/UI/RegistroVenta.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/Negocio/ProductoService.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/UI/Botones.java</file>
-            <file>file:/D:/Users/practicante3csi/Documents/GitHub/AbarrotesArely/src/UI/ConfirmarVenta.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/EncargadoDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/UI/RegistroVenta.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/ProductoDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/Entidades/Producto.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/PersonaDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/DAOs/CategoriaDAO.java</file>
+            <file>file:/C:/Users/Desktop/Documents/GitHub/AbarrotesArely/src/UI/RegistroProducto.java</file>
         </group>
     </open-files>
 </project-private>

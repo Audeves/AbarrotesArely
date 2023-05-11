@@ -7,6 +7,7 @@
     <class>Entidades.Producto</class>
     <class>Entidades.RelProductosVentas</class>
     <class>Entidades.Venta</class>
+    <class>Entidades.Categoria</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemapuntoventa?timeZone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

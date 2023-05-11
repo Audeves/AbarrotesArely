@@ -23,90 +23,89 @@ public class ProductoDAO extends BaseDAO<Producto> {
 
     @Override
     public void agregar(Producto entidad) {
-        EntityManager em = getEntityManager();
         try {
-            em.getTransaction().begin();
-            em.persist(entidad);
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "El producto se agregó correctamente.", "Información", INFORMATION_MESSAGE);
+            EntityManager entityManager = this.getEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(entidad);
+            entityManager.getTransaction().commit();
+
+            // JOptionPane.showMessageDialog(null, "Se agrego nuevo producto", "Aviso", INFORMATION_MESSAGE);
+            System.out.println("Se agrego");
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        } finally {
-            em.close();
+            //   JOptionPane.showMessageDialog(null, "No se pudo agregar el producto", "Aviso", ERROR_MESSAGE);
+            System.out.println("No se agrego");
+            e.printStackTrace();
         }
     }
 
     @Override
     public void eliminar(Producto entidad) {
-        EntityManager em = getEntityManager();
         try {
-            em.getTransaction().begin();
-            entidad = em.merge(entidad);
-            em.remove(entidad);
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "El producto se eliminó correctamente.", "Información", INFORMATION_MESSAGE);
+            EntityManager entityManager = this.getEntityManager();
+            entityManager.getTransaction().begin();
+            Producto producto = entityManager.find(Producto.class, entidad.getId());
+            if (producto != null) {
+                entityManager.remove(producto);
+            }
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Error al eliminar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        } finally {
-            em.close();
+            //    JOptionPane.showMessageDialog(null, "Huvo un error", "Aviso", ERROR_MESSAGE);
+            System.out.println("No se pudo eliminar");
         }
     }
 
     @Override
-    public void actualizar(Producto producto) {
-//        EntityManager em = this.getEntityManager();
-//
-//        Producto productoX = em.find(Producto.class, producto.getId());
-//        if (productoX != null) {
-//            productoX.setStock(producto.getStock());
-//            em.persist(productoX);
-//        } else {
-//            throw new IllegalArgumentException("El producto no existe");
-//        }
-//        em.getTransaction().commit();
-//        System.out.println("El producto se actualizó ");
-
-        EntityManager em = this.getEntityManager();
+    public void actualizar(Producto entidad) {
         try {
-            if (producto != null) {
-                em.getTransaction().begin();
-                em.merge(producto);
-                em.getTransaction().commit();
-            }
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Error al actualizar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
-        } finally {
-            em.close();
-        }
+            EntityManager entityManager = this.getEntityManager();
+            entityManager.getTransaction().begin();
+            Producto productoActualizado = entityManager.find(Producto.class, entidad.getId());
+            if (productoActualizado != null) {
+                productoActualizado.setNombreProducto(entidad.getNombreProducto());
+                productoActualizado.setPrecioActual(entidad.getPrecioActual());
+                productoActualizado.setStock(entidad.getStock());
 
-        System.out.println("El producto se actualizó ");
+                entityManager.merge(productoActualizado);
+                System.out.println("Se ha actualizado con exito");
+            } else {
+                //  JOptionPane.showMessageDialog(null, "No se encontro el producto", "Aviso", INFORMATION_MESSAGE);
+                System.out.println("No se pudo actualizar");
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            //  JOptionPane.showMessageDialog(null, "Huvo un error", "Aviso", ERROR_MESSAGE);
+            System.out.println("No se pudo actualizar");
+        }
     }
 
     @Override
     public Producto buscarPorId(Integer id) {
-        EntityManager em = this.getEntityManager();
-        em.getTransaction().begin();
-        em.getTransaction().commit();
-        return em.find(Producto.class, id);
+        String jpq = "SELECT p FROM Producto p WHERE p.Id = :id"; // Utiliza p.Id en lugar de u.id
+        EntityManager entityManager = this.getEntityManager();
+        TypedQuery<Producto> query = entityManager.createQuery(jpq, Producto.class);
+        query.setParameter("id", id);
+        List<Producto> productos = query.getResultList();
+
+        if (productos.isEmpty()) {
+            System.out.println("No se pudo encontrar el producto");
+            return null;
+        } else {
+            return productos.get(0);
+        }
     }
 
     @Override
     public List<Producto> mostrarTodas() {
-        EntityManager em = this.getEntityManager();
-
-        Query consulta = em.createQuery("SELECT P FROM Producto p ");
-        em.getTransaction().begin();
-
-        List<Producto> productos = consulta.getResultList();
-
-        for (Producto productos1 : productos) {
-            System.out.println(productos1);
+        String jpq = "SELECT u FROM Producto u";
+        EntityManager entityManager = this.getEntityManager();
+        TypedQuery<Producto> query = entityManager.createQuery(jpq, Producto.class);
+        List<Producto> productos = query.getResultList();
+        if (productos.isEmpty()) {
+            return null;
+        } else {
+            return productos;
         }
-        em.getTransaction().commit();
-        return new ArrayList<>(productos);
+
     }
 
     public ArrayList<Producto> buscarPorNombre(String nombre) {

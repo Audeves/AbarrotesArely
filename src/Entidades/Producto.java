@@ -61,7 +61,11 @@ public class Producto implements Serializable {
 
     public Producto() {
     }
-
+    
+    public Producto(Integer Id) {
+        this.Id = Id;
+    }
+    
     public Producto(Integer Id, String nombreProducto, float precioActual, int stock, String categoria) {
         this.Id = Id;
         this.nombreProducto = nombreProducto;
@@ -70,8 +74,6 @@ public class Producto implements Serializable {
         this.categoria = categoria;
     }
 
-    
-    
     public Producto(String nombreProducto, float precioActual, int stock, String categoria) {
         this.nombreProducto = nombreProducto;
         this.precioActual = precioActual;
