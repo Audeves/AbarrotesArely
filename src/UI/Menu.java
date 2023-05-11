@@ -32,10 +32,10 @@ public class Menu extends javax.swing.JFrame {
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnIniciarSesion = new javax.swing.JButton();
-        btnIniciarSesion1 = new javax.swing.JButton();
-        btnIniciarSesion2 = new javax.swing.JButton();
-        btnIniciarSesion3 = new javax.swing.JButton();
+        btnRealizarVenta = new javax.swing.JButton();
+        btnCerrarSesion = new javax.swing.JButton();
+        btnProductos = new javax.swing.JButton();
+        btnCategorias = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,83 +50,83 @@ public class Menu extends javax.swing.JFrame {
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addGap(0, 229, Short.MAX_VALUE)
+                .addGap(0, 147, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(0, 230, Short.MAX_VALUE))
+                .addGap(0, 147, Short.MAX_VALUE))
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addGap(0, 21, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 73, Short.MAX_VALUE))
         );
 
         getContentPane().add(Header, java.awt.BorderLayout.PAGE_START);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
-        btnIniciarSesion.setText("Categorías");
-        btnIniciarSesion.setToolTipText("");
-        btnIniciarSesion.setBorderPainted(false);
-        btnIniciarSesion.setContentAreaFilled(false);
-        btnIniciarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIniciarSesion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
-        btnIniciarSesion.setRequestFocusEnabled(false);
-        btnIniciarSesion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
-        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
+        btnRealizarVenta.setText("Realizar Venta");
+        btnRealizarVenta.setToolTipText("");
+        btnRealizarVenta.setBorderPainted(false);
+        btnRealizarVenta.setContentAreaFilled(false);
+        btnRealizarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRealizarVenta.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
+        btnRealizarVenta.setRequestFocusEnabled(false);
+        btnRealizarVenta.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
+        btnRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesionActionPerformed(evt);
+                btnRealizarVentaActionPerformed(evt);
             }
         });
 
-        btnIniciarSesion1.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciarSesion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
-        btnIniciarSesion1.setText("Realizar Venta");
-        btnIniciarSesion1.setToolTipText("");
-        btnIniciarSesion1.setBorderPainted(false);
-        btnIniciarSesion1.setContentAreaFilled(false);
-        btnIniciarSesion1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIniciarSesion1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
-        btnIniciarSesion1.setRequestFocusEnabled(false);
-        btnIniciarSesion1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
-        btnIniciarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnSalir.png"))); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.setToolTipText("");
+        btnCerrarSesion.setBorderPainted(false);
+        btnCerrarSesion.setContentAreaFilled(false);
+        btnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrarSesion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnSalir.png"))); // NOI18N
+        btnCerrarSesion.setRequestFocusEnabled(false);
+        btnCerrarSesion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnSalirSelected.png"))); // NOI18N
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion1ActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
 
-        btnIniciarSesion2.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciarSesion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnSalir.png"))); // NOI18N
-        btnIniciarSesion2.setText("Cerrar Sesión");
-        btnIniciarSesion2.setToolTipText("");
-        btnIniciarSesion2.setBorderPainted(false);
-        btnIniciarSesion2.setContentAreaFilled(false);
-        btnIniciarSesion2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIniciarSesion2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnSalir.png"))); // NOI18N
-        btnIniciarSesion2.setRequestFocusEnabled(false);
-        btnIniciarSesion2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnSalirSelected.png"))); // NOI18N
-        btnIniciarSesion2.addActionListener(new java.awt.event.ActionListener() {
+        btnProductos.setForeground(new java.awt.Color(255, 255, 255));
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
+        btnProductos.setText("Productos");
+        btnProductos.setToolTipText("");
+        btnProductos.setBorderPainted(false);
+        btnProductos.setContentAreaFilled(false);
+        btnProductos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProductos.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
+        btnProductos.setRequestFocusEnabled(false);
+        btnProductos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion2ActionPerformed(evt);
+                btnProductosActionPerformed(evt);
             }
         });
 
-        btnIniciarSesion3.setForeground(new java.awt.Color(255, 255, 255));
-        btnIniciarSesion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
-        btnIniciarSesion3.setText("Productos");
-        btnIniciarSesion3.setToolTipText("");
-        btnIniciarSesion3.setBorderPainted(false);
-        btnIniciarSesion3.setContentAreaFilled(false);
-        btnIniciarSesion3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIniciarSesion3.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
-        btnIniciarSesion3.setRequestFocusEnabled(false);
-        btnIniciarSesion3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
-        btnIniciarSesion3.addActionListener(new java.awt.event.ActionListener() {
+        btnCategorias.setForeground(new java.awt.Color(255, 255, 255));
+        btnCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
+        btnCategorias.setText("Categorías");
+        btnCategorias.setToolTipText("");
+        btnCategorias.setBorderPainted(false);
+        btnCategorias.setContentAreaFilled(false);
+        btnCategorias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCategorias.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión1.png"))); // NOI18N
+        btnCategorias.setRequestFocusEnabled(false);
+        btnCategorias.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnIniciarSesión2.png"))); // NOI18N
+        btnCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarSesion3ActionPerformed(evt);
+                btnCategoriasActionPerformed(evt);
             }
         });
 
@@ -135,26 +135,26 @@ public class Menu extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(186, 186, 186)
+                .addGap(106, 106, 106)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnIniciarSesion1)
-                    .addComponent(btnIniciarSesion3)
-                    .addComponent(btnIniciarSesion2)
-                    .addComponent(btnIniciarSesion))
-                .addContainerGap(192, Short.MAX_VALUE))
+                    .addComponent(btnCategorias)
+                    .addComponent(btnCerrarSesion)
+                    .addComponent(btnProductos)
+                    .addComponent(btnRealizarVenta))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(btnIniciarSesion1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnIniciarSesion)
+                .addGap(44, 44, 44)
+                .addComponent(btnCategorias)
                 .addGap(18, 18, 18)
-                .addComponent(btnIniciarSesion3)
+                .addComponent(btnProductos)
                 .addGap(18, 18, 18)
-                .addComponent(btnIniciarSesion2)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addComponent(btnRealizarVenta)
+                .addGap(18, 18, 18)
+                .addComponent(btnCerrarSesion)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -162,21 +162,27 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+        RegistroCategoria rC = new RegistroCategoria();
+        rC.setVisible(true);
+    }//GEN-LAST:event_btnCategoriasActionPerformed
 
-    }//GEN-LAST:event_btnIniciarSesionActionPerformed
-
-    private void btnIniciarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion1ActionPerformed
+    private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion1ActionPerformed
+        RegistroVenta rV = new RegistroVenta();
+        rV.setVisible(true);
+    }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
-    private void btnIniciarSesion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion2ActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void btnIniciarSesion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesion3ActionPerformed
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnIniciarSesion3ActionPerformed
+        RegistroProducto rP = new RegistroProducto();
+        rP.setVisible(true);
+    }//GEN-LAST:event_btnProductosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,10 +221,10 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Header;
-    private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnIniciarSesion1;
-    private javax.swing.JButton btnIniciarSesion2;
-    private javax.swing.JButton btnIniciarSesion3;
+    private javax.swing.JButton btnCategorias;
+    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnRealizarVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

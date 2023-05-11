@@ -11,6 +11,7 @@ import Entidades.Categoria;
 import Entidades.Producto;
 import Negocio.CategoriaService;
 import Negocio.ProductoService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -501,11 +502,12 @@ public class RegistroProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-
+        System.exit(0);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
@@ -528,7 +530,20 @@ public class RegistroProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_tfBuscarMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        String nombre = this.tfBuscar.getText();
+        ArrayList<Producto> productos = new ArrayList<>();
+        DefaultTableModel xmodelo = (DefaultTableModel) this.tblProductos.getModel();
+        productos = (ArrayList<Producto>) this.pd.buscarPorNombre(nombre);
+        xmodelo.setRowCount(0);
+        for (Producto producto : productos) {
+            Object[] fila = new Object[5];
+            fila[0] = producto.getId();
+            fila[1] = producto.getNombreProducto();
+            fila[2] = producto.getPrecioActual();
+            fila[3] = producto.getStock();
+            fila[4] = producto.getCategoria();
+            xmodelo.addRow(fila);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tfBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscarActionPerformed
