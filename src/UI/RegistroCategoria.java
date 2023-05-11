@@ -554,8 +554,9 @@ public class RegistroCategoria extends javax.swing.JFrame {
                     lblNota.setText("");
                 }
                 for (Categoria categoria : categorias) {
-                    dato[0] = categoria.getNombre();
-                    dato[1] = categoria.getDescripcion();
+                    dato[0] = Integer.toString(categoria.getId());
+                    dato[1] = categoria.getNombre();
+                    dato[2] = categoria.getDescripcion();
                     tb.addRow(dato);
                 }
             } catch (Exception i) {
