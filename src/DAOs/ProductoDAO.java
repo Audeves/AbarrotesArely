@@ -43,14 +43,32 @@ public class ProductoDAO extends BaseDAO<Producto> {
         try {
             EntityManager entityManager = this.getEntityManager();
             entityManager.getTransaction().begin();
-            Producto producto = entityManager.find(Producto.class, entidad.getId());
+
+            Producto producto = buscarPorId(entidad.getId());
             if (producto != null) {
-                entityManager.remove(producto);
+                producto.setExistencia(false);
+                entityManager.merge(producto);
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            //    JOptionPane.showMessageDialog(null, "Huvo un error", "Aviso", ERROR_MESSAGE);
-            System.out.println("No se pudo eliminar");
+            e.printStackTrace();
+            System.out.println("No se pudo quitar el producto");
+        }
+    }
+    
+    public void continuar(Producto entidad) {
+        try {
+            EntityManager entityManager = this.getEntityManager();
+            entityManager.getTransaction().begin();
+
+            Producto producto = buscarPorId(entidad.getId());
+            if (producto != null) {
+                producto.setExistencia(true);
+                entityManager.merge(producto);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -63,7 +81,6 @@ public class ProductoDAO extends BaseDAO<Producto> {
             if (productoActualizado != null) {
                 productoActualizado.setNombreProducto(entidad.getNombreProducto());
                 productoActualizado.setPrecioActual(entidad.getPrecioActual());
-                productoActualizado.setStock(entidad.getStock());
 
                 entityManager.merge(productoActualizado);
                 System.out.println("Se ha actualizado con exito");

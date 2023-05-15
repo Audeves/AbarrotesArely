@@ -39,9 +39,19 @@ public class ProductoService {
     public void eliminarProducto(Producto producto) {       
         try {
             productoDAO.eliminar(producto);
-            JOptionPane.showMessageDialog(null, "Se eliminó el producto exitosamente", "Aviso", INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se descontinuo el producto exitosamente", "Aviso", INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se pudo eliminar el producto", "Aviso", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se pudo descontinuo el producto", "Aviso", ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+    
+    public void continuarProducto(Producto producto) {       
+        try {
+            productoDAO.continuar(producto);
+            JOptionPane.showMessageDialog(null, "Se volvio a continuar el producto exitosamente", "Aviso", INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo continuar el producto", "Aviso", ERROR_MESSAGE);
             e.printStackTrace();
         }
     }

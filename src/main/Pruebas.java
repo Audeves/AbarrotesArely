@@ -5,6 +5,7 @@
  */
 package main;
 
+import DAOs.CategoriaDAO;
 import DAOs.ProductoDAO;
 import DAOs.RelProductoVentaDAO;
 import Entidades.Encargado;
@@ -45,6 +46,7 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
         Menu menu = new Menu();
         menu.show();
 //        RegistroVenta rV = new RegistroVenta();
@@ -54,7 +56,7 @@ public class Pruebas {
 //        Date date = new GregorianCalendar(Calendar.YEAR, Calendar.MARCH, Calendar.DAY_OF_MONTH).getTime();
 //        ProductoService productoService = new ProductoService();
 //      
-//        Producto producto = new Producto("Nito", 17, 10, "92 gr");
+//        Producto producto = new Producto("Coca", 30, 10, "2.5 LT",false);
 //        productoService.agregarProducto(producto);
 //        
 //        ArrayList<Encargado> listaEncargados = new ArrayList<Encargado>();

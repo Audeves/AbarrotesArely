@@ -399,10 +399,10 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 int stocA = productoBD.getStock() - listaProductosDTO.get(i).getCantidad();
                 productoBD.setStock(stocA);
                 em.merge(productoBD);
-                
+
                 listaCarrito.get(i).setStock(productoBD.getStock());
-                
-                System.out.println("Producto: "+listaCarrito.get(i).getNombreProducto() + " Stock: "+ listaCarrito.get(i).getStock());
+
+//                System.out.println("Producto: "+listaCarrito.get(i).getNombreProducto() + " Stock: "+ listaCarrito.get(i).getStock());
 //                for (int j = 0; j < listaCarrito.size(); j++) {
 //                    listaCarrito.get(j).setStock(productoBD.getStock());
 //                    
@@ -411,15 +411,16 @@ public class ConfirmarVenta extends javax.swing.JFrame {
 //                }
                 //id = listaCarrito.get(i).getId();
                 System.out.println(listaProductosDTO.size());
-               
-                relProductoVentasCollection.add(new RelProductosVentas(listaProductosDTO.get(i).getCantidad(), listaProductosDTO.get(i).getPrecioVenta(), listaProductosDTO.get(i).getSubtotal(), productoBD, venta));
-                productoBD.setRelProductosVentasCollection(relProductoVentasCollection);
-                venta.setRelProductosVentasCollection(relProductoVentasCollection);
-                
+
+//                relProductoVentasCollection.add(new RelProductosVentas(listaProductosDTO.get(i).getCantidad(), listaProductosDTO.get(i).getPrecioVenta(), listaProductosDTO.get(i).getSubtotal(), productoBD, venta));
+//                productoBD.setRelProductosVentasCollection(relProductoVentasCollection);
+//                venta.setRelProductosVentasCollection(relProductoVentasCollection);
+                RelProductosVentas relProductoVentas = new RelProductosVentas(listaProductosDTO.get(i).getCantidad(), listaProductosDTO.get(i).getPrecioVenta(), listaProductosDTO.get(i).getSubtotal(), productoBD, venta);
 //                RelProductosVentas relProductosVentasBuscada = em.find(RelProductosVentas.class, listaProductosDTO.get(i).getIdProducto());
-                System.out.println("ID del producto: "+ listaProductosDTO.get(i).getIdProducto());
+                System.out.println("ID del producto: " + listaProductosDTO.get(i).getIdProducto());
                 System.out.println("Cantidad vendida " + listaProductosDTO.get(i).getCantidad());
-                
+                em.persist(relProductoVentas);
+
             }
             listaProductosDTO.clear();
 //            RelProductosVentas relProductosVentas = new RelProductosVentas(cantidadVendida, PrecioVender, subTotal, productoBuscado, venta);
@@ -428,12 +429,12 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La venta se agregó correctamente.", "Información", INFORMATION_MESSAGE);
         } catch (Exception e) {
             em.getTransaction().rollback();
-            
+
             JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage(), "Error", ERROR_MESSAGE);
         } finally {
             em.close();
         }
-        
+
         this.dispose();
 
     }//GEN-LAST:event_btnAceptarActionPerformed

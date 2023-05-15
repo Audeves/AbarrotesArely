@@ -50,7 +50,7 @@ public class RegistroProducto extends javax.swing.JFrame {
 
     private void hacerTabla() {
         eliminarDatos();
-        String[] dato = new String[7];
+        String[] dato = new String[6];
         DefaultTableModel tb = (DefaultTableModel) tblProductos.getModel();
         List<Producto> productos = pd.mostrarTodosLosProductos();
         try {
@@ -63,6 +63,11 @@ public class RegistroProducto extends javax.swing.JFrame {
                 dato[2] = Float.toString(producto.getPrecioActual());
                 dato[3] = Integer.toString(producto.getStock());
                 dato[4] = producto.getCategoria();
+                if (producto.getExistencia() == true) {
+                    dato[5] = "Si";
+                } else {
+                    dato[5] = "No";
+                }
                 tb.addRow(dato);
             }
         } catch (Exception e) {
@@ -190,23 +195,23 @@ public class RegistroProducto extends javax.swing.JFrame {
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Precio", "Stock", "Categoría"
+                "ID", "Nombre", "Precio", "Stock", "Categoría", "Se vende"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -410,7 +415,7 @@ public class RegistroProducto extends javax.swing.JFrame {
 
         btnDescontinuar.setForeground(new java.awt.Color(255, 255, 255));
         btnDescontinuar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/imagenes/btnCancelar.png"))); // NOI18N
-        btnDescontinuar.setText("Eliminar");
+        btnDescontinuar.setText("Descontinuar/continuar");
         btnDescontinuar.setToolTipText("");
         btnDescontinuar.setBorderPainted(false);
         btnDescontinuar.setContentAreaFilled(false);
@@ -516,9 +521,9 @@ public class RegistroProducto extends javax.swing.JFrame {
             tfID.setText(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 0)));
             tfNombre.setText(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 1)));
             tfPrecio.setText(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 2)));
-            tfStock.setText(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 3)));
+//            tfStock.setText(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 3)));
             for (int i = 0; i < cbCategoria.getItemCount(); i++) {
-                if (String.valueOf(cbCategoria.getItemAt(i)).equals(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 4)))) {
+                if (String.valueOf(cbCategoria.getItemAt(i)).equals(String.valueOf(tblProductos.getValueAt(tblProductos.getSelectedRow(), 3)))) {
                     cbCategoria.setSelectedIndex(i);
                 }
             }
@@ -533,17 +538,22 @@ public class RegistroProducto extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String nombre = this.tfBuscar.getText();
         ArrayList<Producto> productos = new ArrayList<>();
-        DefaultTableModel xmodelo = (DefaultTableModel) this.tblProductos.getModel();
+        String[] dato = new String[6];
+        DefaultTableModel tb = (DefaultTableModel) this.tblProductos.getModel();
         productos = (ArrayList<Producto>) this.pd.buscarPorNombre(nombre);
-        xmodelo.setRowCount(0);
+        tb.setRowCount(0);
         for (Producto producto : productos) {
-            Object[] fila = new Object[5];
-            fila[0] = producto.getId();
-            fila[1] = producto.getNombreProducto();
-            fila[2] = producto.getPrecioActual();
-            fila[3] = producto.getStock();
-            fila[4] = producto.getCategoria();
-            xmodelo.addRow(fila);
+            dato[0] = Integer.toString(producto.getId());
+            dato[1] = producto.getNombreProducto();
+            dato[2] = Float.toString(producto.getPrecioActual());
+            dato[3] = Integer.toString(producto.getStock());
+            dato[4] = producto.getCategoria();
+            if (producto.getExistencia() == true) {
+                dato[5] = "Si";
+            } else {
+                dato[5] = "No";
+            }
+            tb.addRow(dato);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -583,9 +593,13 @@ public class RegistroProducto extends javax.swing.JFrame {
     private void btnDescontinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescontinuarActionPerformed
         // TODO add your handling code here:
         if (!tfID.getText().isEmpty() && !tfID.getText().equals("")) {
-            int idProducto = Integer.parseInt(tfID.getText());
-            Producto producto = new Producto(idProducto);
-            pd.eliminarProducto(producto);
+            Producto producto = new Producto(Integer.parseInt(tfID.getText()));
+            if (pd.buscarProductoPorId(Integer.parseInt(tfID.getText())).getExistencia()) {
+                pd.eliminarProducto(producto);
+            } else {
+                pd.continuarProducto(producto);
+            }
+
             hacerTabla();
             limpiarCampos();
         }
@@ -594,7 +608,7 @@ public class RegistroProducto extends javax.swing.JFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
         if (!tfID.getText().isEmpty() && !tfID.getText().equals("") && !tfNombre.getText().isEmpty() && !tfNombre.getText().equals("")
-                && !tfPrecio.getText().isEmpty() && !tfPrecio.getText().equals("") && !tfStock.getText().isEmpty() && !tfStock.getText().equals("")) {
+                && !tfPrecio.getText().isEmpty() && !tfPrecio.getText().equals("")) {
 
             Producto producto = pd.buscarProductoPorId(Integer.parseInt(tfID.getText()));
             producto.setNombreProducto(tfNombre.getText());
@@ -604,14 +618,13 @@ public class RegistroProducto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Introduzca un precio válido: actualmente esta vacio.", "Aviso", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
-            int stockNuevo = Integer.parseInt(tfStock.getText());
+
             if (precioNuevo == 0) {
                 JOptionPane.showMessageDialog(null, "Introduzca un stock válido: actualmente esta vacio.", "Aviso", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
             producto.setPrecioActual(precioNuevo);
-            producto.setStock(stockNuevo);
             producto.setCategoria(String.valueOf(cbCategoria.getSelectedItem()));
 
             pd.actualizarProducto(producto);
@@ -624,7 +637,7 @@ public class RegistroProducto extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!tfNombre.getText().isEmpty() && !tfNombre.getText().equals("") && !tfPrecio.getText().isEmpty() && !tfPrecio.getText().equals("")
                 && !tfStock.getText().isEmpty() && !tfStock.getText().equals("")) {
-            Producto producto = new Producto(tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), Integer.parseInt(tfStock.getText()), String.valueOf(cbCategoria.getSelectedItem()));
+            Producto producto = new Producto(tfNombre.getText(), Float.parseFloat(tfPrecio.getText()), Integer.parseInt(tfStock.getText()), String.valueOf(cbCategoria.getSelectedItem()), true);
             pd.agregarProducto(producto);
             hacerTabla();
             limpiarCampos();

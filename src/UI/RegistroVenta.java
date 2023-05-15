@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -549,6 +550,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         listaProductos = productos;
         xmodelo.setRowCount(0);
         for (Producto producto : productos) {
+            if (producto.getExistencia()) {
             Object[] fila = new Object[8];
             fila[0] = producto.getId();
             fila[1] = producto.getNombreProducto();
@@ -559,6 +561,9 @@ public class RegistroVenta extends javax.swing.JFrame {
             fila[6] = btnAumentar;
             fila[7] = btnDisminuir;
             xmodelo.addRow(fila);
+            }else{
+                JOptionPane.showMessageDialog(null, "El producto no esta en existencia para vender", "Aviso", ERROR_MESSAGE);
+            }
         }
         btnAgregar.addActionListener(new ActionListener() {
             @Override
