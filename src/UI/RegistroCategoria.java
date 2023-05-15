@@ -17,21 +17,24 @@ import javax.swing.table.DefaultTableModel;
  * @author itzel
  */
 public class RegistroCategoria extends javax.swing.JFrame {
-    
+
     CategoriaService cd = new CategoriaService();
+
     /**
      * Creates new form Categorias
      */
     public RegistroCategoria() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         configurarPantalla();
         hacerTabla();
     }
+
     public void eliminarDatos() {
         DefaultTableModel tb = (DefaultTableModel) tblCategoria.getModel();
         tb.setRowCount(0);
     }
-    
+
     private void hacerTabla() {
         eliminarDatos();
         String[] dato = new String[4];
@@ -47,19 +50,21 @@ public class RegistroCategoria extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+
     public void limpiarCampos() {
         tfID.setText("");
         tfNombre.setText("");
         tfDescripcion.setText("");
     }
-    
+
     private void configurarPantalla() {
 
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setTitle("Registrar Ventas");
+        this.setTitle("Registrar Categorias");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

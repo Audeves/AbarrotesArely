@@ -30,6 +30,7 @@ public class RegistroProducto extends javax.swing.JFrame {
      */
     public RegistroProducto() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         configurarPantalla();
         hacerComboBox();
         hacerTabla();
@@ -695,7 +696,7 @@ public class RegistroProducto extends javax.swing.JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setTitle("Registrar Ventas");
+        this.setTitle("Registrar Productos");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
