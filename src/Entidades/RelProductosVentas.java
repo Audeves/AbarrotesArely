@@ -59,7 +59,7 @@ public class RelProductosVentas implements Serializable {
     public RelProductosVentas() {
     }
 
-    public RelProductosVentas( int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
+    public RelProductosVentas(int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
         this.cantidadVendida = cantidadVendida;
         this.precioVenta = precioVenta;
         this.subtotal = subtotal;

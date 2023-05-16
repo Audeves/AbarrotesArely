@@ -400,7 +400,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
                 productoBD.setStock(stocA);
                 em.merge(productoBD);
 
-                listaCarrito.get(i).setStock(productoBD.getStock());
+//                listaCarrito.get(i).setStock(productoBD.getStock());
 
 //                System.out.println("Producto: "+listaCarrito.get(i).getNombreProducto() + " Stock: "+ listaCarrito.get(i).getStock());
 //                for (int j = 0; j < listaCarrito.size(); j++) {
