@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -517,7 +518,7 @@ public class RegistroVenta extends javax.swing.JFrame {
     }
 
     private void cargarProductos() {
-        ArrayList<Producto> productosListaService = (ArrayList<Producto>) this.productoService.mostrarTodosLosProductos();
+        Vector<Producto> productosListaService = (Vector<Producto>) this.productoService.mostrarTodosLosProductos();
         DefaultTableModel modeloProducto = (DefaultTableModel) this.tablaProductos.getModel();
         modeloProducto.setRowCount(0);
         for (Producto producto : productosListaService) {
