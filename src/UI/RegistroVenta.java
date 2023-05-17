@@ -418,7 +418,8 @@ public class RegistroVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        Menu menu = new Menu();
+        menu.show();
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -461,7 +462,8 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        System.exit(0);
+        Login login = new Login();
+        login.show();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
     private void cargarTicket() {
         //Renderización de la tabla para que puedan añadirse componentes dentro

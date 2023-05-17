@@ -452,12 +452,14 @@ public class RegistroCategoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        System.exit(0);
+        Login login = new Login();
+        login.show();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();;
+        Menu menu = new Menu();
+        menu.show();
+        this.dispose();
     }//GEN-LAST:event_botonRegresarActionPerformed
 
     private void tblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriaMouseClicked

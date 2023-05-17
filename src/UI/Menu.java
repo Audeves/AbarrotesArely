@@ -174,8 +174,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+        Login login = new Login();
+        login.show();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed

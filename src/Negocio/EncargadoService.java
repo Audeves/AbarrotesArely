@@ -8,6 +8,8 @@ package Negocio;
 import DAOs.EncargadoDAO;
 import Entidades.Encargado;
 import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -41,6 +43,16 @@ public class EncargadoService {
             throw new IllegalArgumentException("El ID del encargado a buscar no puede ser nulo.");
         }
         return encargadoDAO.buscarPorId(id);
+    }
+    
+    public List<Encargado> buscarEncargadoPorNombreUsuario(String nombreUsuario){
+        try {
+            return encargadoDAO.buscarPorNombreUsuario(nombreUsuario);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error, usuario no existente", "Aviso", ERROR_MESSAGE);
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public List<Encargado> mostrarTodosLosEncargados() {

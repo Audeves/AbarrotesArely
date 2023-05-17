@@ -60,6 +60,10 @@ public class Encargado implements Serializable {
     public Encargado() {
     }
 
+    public Encargado(String usuario) {
+        this.usuario = usuario;
+    }
+
     public Encargado(String usuario, String contraseña, Persona persona) {
         this.usuario = usuario;
         this.contraseña = contraseña;

@@ -5,6 +5,12 @@
  */
 package UI;
 
+import Entidades.Encargado;
+import Negocio.EncargadoService;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 /**
  *
  * @author itzel
@@ -14,11 +20,38 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    EncargadoService es = new EncargadoService();
+    
     public Login() {
         initComponents();
+        setTitle("Login");
         setResizable(false);
         setLocationRelativeTo(null);
     }
+    
+    public void iniciarSesion(){
+        String usuario = this.txtUser.getText();
+        String pass = String.copyValueOf(this.txtPassword.getPassword());
+        ArrayList<Encargado> encargados = new ArrayList<>();
+        String[] dato = new String[2];
+        if (usuario.isEmpty() && pass.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no pueden quedar vacios", "Aviso", ERROR_MESSAGE);
+        }else {
+            encargados = (ArrayList<Encargado>) this.es.buscarEncargadoPorNombreUsuario(usuario);
+            for (Encargado encargado : encargados) {
+                dato[0] = encargado.getUsuario();
+                dato[1] = encargado.getContraseña();
+                if (encargado.getUsuario().equals(usuario) && encargado.getContraseña().equals(pass)) {
+                    Menu menu = new Menu();
+                    menu.show();
+                    this.dispose();
+                }else {
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "Aviso", ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +69,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnIniciarSesion = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +161,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(19, 19, 19)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(txtPassword))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -141,7 +174,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(txtPassword))
                 .addGap(83, 83, 83)
                 .addComponent(btnIniciarSesion)
                 .addContainerGap(186, Short.MAX_VALUE))
@@ -161,7 +194,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-
+        iniciarSesion();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarSesionMouseClicked
@@ -210,7 +243,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
