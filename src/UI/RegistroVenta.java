@@ -545,6 +545,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         //de las celdas
         tablaProductos.setDefaultRenderer(Object.class, new Render());
         //Botones que se general al compilar
+        cantidad = 0;
         JButton btnAumentar = new JButton();
         btnAumentar.setName("aumentar");
         btnAumentar.setText("+");
