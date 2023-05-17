@@ -17,6 +17,7 @@ import Negocio.PersonaService;
 import Negocio.ProductoService;
 import Negocio.VentaService;
 import Negocio.VentasService;
+import UI.Login;
 import UI.Menu;
 import UI.RegistroProducto;
 import UI.RegistroVenta;
@@ -46,6 +47,8 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Login lo = new Login();
+        lo.show();
         
 //        Menu menu = new Menu();
 //        menu.show();

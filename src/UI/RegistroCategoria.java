@@ -454,6 +454,7 @@ public class RegistroCategoria extends javax.swing.JFrame {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         Login login = new Login();
         login.show();
+        this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed

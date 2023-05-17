@@ -455,15 +455,20 @@ public class RegistroVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        ConfirmarVenta cv = new ConfirmarVenta(this.listaProductoDTOs);
-        cv.setVisible(true);
-        jTotal.setText("000.00");
-        limpiarTablaTicket();
+        if (!this.listaProductoDTOs.isEmpty()) {
+            ConfirmarVenta cv = new ConfirmarVenta(this.listaProductoDTOs);
+            cv.setVisible(true);
+            jTotal.setText("000.00");
+            limpiarTablaTicket();
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede registrar una venta si el carrito se encuentera vacio","Aviso",ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         Login login = new Login();
         login.show();
+        this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
     private void cargarTicket() {
         //Renderización de la tabla para que puedan añadirse componentes dentro

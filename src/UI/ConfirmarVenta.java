@@ -89,6 +89,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
             totalFloat = Float.parseFloat(total.replace(",", ".")); // Reemplazamos la coma por un punto y luego convertimos a float
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "El total no es un número válido");
+            this.setVisible(false);
             return;
         }
 
@@ -363,7 +364,9 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Login login = new Login();
+        login.show();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -440,7 +443,7 @@ public class ConfirmarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
+       this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
