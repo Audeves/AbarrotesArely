@@ -747,6 +747,8 @@ public class RegistroVenta extends javax.swing.JFrame {
             if (indiceFilaSeleccionada != -1) {
                 JOptionPane.showConfirmDialog(this, "Sin valores por borrar.");
             } else {
+                jTotal.setText("000.00");
+                listaProductoDTOs.clear();
                 modelo.setRowCount(0);
             }
         } else {
