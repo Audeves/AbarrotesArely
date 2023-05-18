@@ -165,23 +165,27 @@ public class Menu extends javax.swing.JFrame {
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         RegistroCategoria rC = new RegistroCategoria();
         rC.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
         // TODO add your handling code here:
         RegistroVenta rV = new RegistroVenta();
         rV.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         Login login = new Login();
         login.show();
+        this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here:
         RegistroProducto rP = new RegistroProducto();
         rP.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnProductosActionPerformed
 
     /**
