@@ -545,6 +545,7 @@ public class RegistroVenta extends javax.swing.JFrame {
         //de las celdas
         tablaProductos.setDefaultRenderer(Object.class, new Render());
         //Botones que se general al compilar
+        cantidad = 0;
         JButton btnAumentar = new JButton();
         btnAumentar.setName("aumentar");
         btnAumentar.setText("+");
@@ -747,6 +748,8 @@ public class RegistroVenta extends javax.swing.JFrame {
             if (indiceFilaSeleccionada != -1) {
                 JOptionPane.showConfirmDialog(this, "Sin valores por borrar.");
             } else {
+                jTotal.setText("000.00");
+                listaProductoDTOs.clear();
                 modelo.setRowCount(0);
             }
         } else {
