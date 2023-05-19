@@ -57,7 +57,7 @@ public class Venta implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "venta")
     private Collection<RelProductosVentas> relProductosVentasCollection;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "idEncargado", nullable = false)
     private Encargado encargado;
 

@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,9 +43,13 @@ public class Encargado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer idencargado;
-    @Column(name = "rfc", nullable = false)
     
-    private String rfc;
+    @Column(name = "usuario", nullable = false)
+    private String usuario;
+    
+    @Column(name = "contraseña", nullable = false)
+    private String contraseña;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "encargado")
     private List<Venta> ventas;
     
@@ -54,10 +59,15 @@ public class Encargado implements Serializable {
 
     public Encargado() {
     }
-    
-    public Encargado(String rfc,  Persona personaidPersona) {
-        this.rfc = rfc;
-        this.persona = personaidPersona;
+
+    public Encargado(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public Encargado(String usuario, String contraseña, Persona persona) {
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.persona = persona;
     }
 
     public Integer getIdencargado() {
@@ -68,12 +78,20 @@ public class Encargado implements Serializable {
         this.idencargado = idencargado;
     }
 
-    public String getRfc() {
-        return rfc;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public Collection<Venta> getVentaCollection() {
@@ -94,12 +112,7 @@ public class Encargado implements Serializable {
 
     @Override
     public String toString() {
-        return "Encargado{" + "idencargado=" + idencargado + ", rfc=" + rfc + ", ventaCollection=" + ventas + ", personaidPersona=" + persona + '}';
+        return "Encargado{" + "idencargado=" + idencargado + ", usuario=" + usuario + ", contrase\u00f1a=" + contraseña + ", ventas=" + ventas + ", persona=" + persona + '}';
     }
-    
-    
-    
-    
-    
     
 }

@@ -56,10 +56,25 @@ public class Producto implements Serializable {
     @Column(name = "categoria", nullable = false)
     private String categoria;
     
+    @Column(name = "existencia", nullable = false)
+    private boolean existencia;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<RelProductosVentas> relProductosVentasCollection;
 
     public Producto() {
+    }
+    
+    public Producto(Integer Id) {
+        this.Id = Id;
+    }
+    
+    public Producto(Integer Id, String nombreProducto, float precioActual, int stock, String categoria) {
+        this.Id = Id;
+        this.nombreProducto = nombreProducto;
+        this.precioActual = precioActual;
+        this.stock = stock;
+        this.categoria = categoria;
     }
 
     public Producto(String nombreProducto, float precioActual, int stock, String categoria) {
@@ -67,6 +82,14 @@ public class Producto implements Serializable {
         this.precioActual = precioActual;
         this.stock = stock;
         this.categoria = categoria;
+    }
+
+    public Producto(String nombreProducto, float precioActual, int stock, String categoria, boolean existencia) {
+        this.nombreProducto = nombreProducto;
+        this.precioActual = precioActual;
+        this.stock = stock;
+        this.categoria = categoria;
+        this.existencia = existencia;
     }
 
     public Integer getId() {
@@ -108,6 +131,14 @@ public class Producto implements Serializable {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public boolean getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(boolean existencia) {
+        this.existencia = existencia;
     }
 
     public List<RelProductosVentas> getRelProductosVentasCollection() {

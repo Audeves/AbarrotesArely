@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main;
+import UI.RegistroVenta;
 import java.sql.*;
 
 public class ConexionBD {
@@ -16,6 +17,8 @@ public class ConexionBD {
             try ( // Conexión a la base de datos
                 Connection conexion = DriverManager.getConnection(url, usuario, password)) {
                 System.out.println("Conexión exitosa a la base de datos");
+                RegistroVenta rv = new RegistroVenta();
+                rv.setVisible(true);
                 // Cerrar la conexión
             }
         } catch (SQLException e) {

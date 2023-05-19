@@ -6,6 +6,7 @@
 package DAOs;
 
 import Entidades.Encargado;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -75,6 +76,7 @@ public class EncargadoDAO extends BaseDAO<Encargado>{
         }
         return encargado;
     }
+        
 
     @Override
     public List<Encargado> mostrarTodas() {
@@ -87,6 +89,20 @@ public class EncargadoDAO extends BaseDAO<Encargado>{
             em.close();
         }
         return encargados;
+    }
+
+    public ArrayList<Encargado> buscarPorNombreUsuario(String nombreUsuario) {
+        EntityManager em = this.getEntityManager();
+        TypedQuery<Encargado> query;
+        if (!nombreUsuario.equals("")) {
+            query = em.createQuery("SELECT e FROM Encargado e WHERE e.usuario LIKE CONCAT('%', :nombreUsuario, '%')", Encargado.class);
+            query.setParameter("nombreUsuario", nombreUsuario);
+        } else {
+            query = em.createQuery("SELECT e FROM Encargado e", Encargado.class);
+        }
+        List<Encargado> encargados = query.getResultList();
+        encargados.forEach(em::refresh); // Forzar la actualización desde la base de datos
+        return new ArrayList<>(encargados);
     }
     
 }

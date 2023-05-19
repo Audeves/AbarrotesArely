@@ -6,6 +6,7 @@
 package DAOs;
 
 import Entidades.Persona;
+import Entidades.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -92,5 +93,8 @@ public class PersonaDAO extends BaseDAO<Persona>{
         }
         return personas;
     }
+
+   
+    
     
 }

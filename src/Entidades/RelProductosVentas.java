@@ -6,6 +6,7 @@
 package Entidades;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,17 +49,17 @@ public class RelProductosVentas implements Serializable {
     private float subtotal;
 
     @JoinColumn(name = "idProducto", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private Producto producto;
 
     @JoinColumn(name = "idVenta", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private Venta venta;
 
     public RelProductosVentas() {
     }
 
-    public RelProductosVentas( int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
+    public RelProductosVentas(int cantidadVendida, float precioVenta, float subtotal, Producto Producto, Venta venta) {
         this.cantidadVendida = cantidadVendida;
         this.precioVenta = precioVenta;
         this.subtotal = subtotal;

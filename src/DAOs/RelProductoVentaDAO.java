@@ -89,5 +89,7 @@ public class RelProductoVentaDAO extends BaseDAO<RelProductosVentas>{
             em.close();
         }
     }
+
+   
     
 }

@@ -4,23 +4,44 @@
  * and open the template in the editor.
  */
 package Negocio;
-import java.util.List;
-import java.util.Optional;
 
+import java.util.List;
+import Entidades.Producto;
 import DAOs.VentaDAO;
+import Entidades.RelProductosVentas;
 import Entidades.Venta;
+
 /**
  *
  * @author Desktop
  */
 public class VentaService {
+
     private VentaDAO ventaDAO;
 
     public VentaService() {
         this.ventaDAO = new VentaDAO();
     }
-
+    
+    public float calcularVenta(int cantidad, float precio){
+        return cantidad * precio;
+    }
+    
+    public float calcularCambio(float total, float importe){
+        return importe - total;
+    }
     public void agregarVenta(Venta venta) {
+        Producto producto = new Producto();
+        RelProductosVentas rpv = new RelProductosVentas();
+        float precioUnitario = producto.getPrecioActual();
+        int cantidad = rpv.getCantidadVendida();
+        float totalVenta = this.calcularVenta(cantidad, precioUnitario);
+        venta.setTotal(totalVenta);
+        
+
+        
+//        float importe = rpv.getSubtotal();
+//        float cambio = this.calcularCambio(totalVenta, importe);
         ventaDAO.agregar(venta);
     }
 
