@@ -182,7 +182,6 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-        // TODO add your handling code here:
         RegistroProducto rP = new RegistroProducto();
         rP.setVisible(true);
         this.dispose();
